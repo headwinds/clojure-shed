@@ -32,6 +32,8 @@ I wanted to learn how to put together a closure project so I basically dismantle
 
 [Flashcards](https://github.com/alexanderjamesking/flashcards)
 
+[etudes for sclojurescript](https://github.com/jdeisenberg/etudes-for-clojurescript)
+
 ## clojurians
 [beginners](https://clojurians-log.clojureverse.org/beginners/2017-11-01)
 
@@ -40,7 +42,6 @@ I wanted to learn how to put together a closure project so I basically dismantle
 
 ## RSS
 [elfeed-cljsrn](https://github.com/areina/elfeed-cljsrn)
-
 
 ## Creator of Closure
 [Rich Hickey](https://www.infoq.com/profile/Rich-Hickey)
