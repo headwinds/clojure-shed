@@ -9,11 +9,15 @@
 - install [java](https://java.com/en/download/)      
 - install [leiningen](https://leiningen.org/)      
 
+If you are on a Mac, it's best to install each with [brew](https://brew.sh/)
+
 ## Getting Started Part 1: Clojure & Clojurescript
 
-#### Focus on Clojure
+#### Focus on Clojure - [Interop with Java](https://clojure.org/reference/java_interop)
 
 Although the goal is to eventually deploy to Zeit, for now (until we figure that out) let's deploy to Heroku since they have created a sample ["hello world" Clojure project](https://devcenter.heroku.com/articles/getting-started-with-clojure) which makes it incredibly easy to do so.
+
+This Heroku project uses leiningen,  [compojure](https://github.com/weavejester/compojure) and [ring](https://github.com/ring-clojure/ring).
 
 ```
 $ git clone https://github.com/heroku/clojure-getting-started.git
@@ -25,7 +29,7 @@ user=>(def server (clojure-getting-started.web/-main))
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
 
-Now you can deploy the hello world to Heroku:
+Now you can deploy the hello world to Heroku. You can either do control-d to stop the REPL or open a new tab to the same directory:
 
 ```
 $ heroku login
@@ -34,7 +38,15 @@ $ git push heroku master
 $ heroku open
 ```
 
-#### Focus on Clojurescript
+So I can see "hello world" - nice! - but how do I [add static resources like css and images](https://nelsonmorris.net/2015/06/01/how-does-serving-html-css-and-javascript-fit-in-a-clojure-web-app.html)?
+
+#### Focus on Clojurescript - [Interop with Javascript](https://kanaka.github.io/clojurescript/web/synonym.html)
+
+If you have developed with create-react-app, you know how easy it is to get up and running building apps with instant feedback.
+
+Wouldn't it be nice to get Hot Module Reloading working too with Clojurescript too? Figwheel [figwheel](https://github.com/bhauman/lein-figwheel) provides HMR so that we can see our changes as soon as we save.
+
+Let's start a new project and build this [quick start figwheel](https://github.com/bhauman/lein-figwheel/wiki/Quick-Start) app.
 
 You have built several React & Redux projects and now wish to learn the equivalent in Clojurescript which is [Reagent](https://reagent-project.github.io/) & [Re-frame](https://github.com/Day8/re-frame).  
 
@@ -100,6 +112,12 @@ I wanted to learn how to put together a Clojure & Clojurescript project so I bas
 ## Resources
 
 [N00b walktrough of re-frame](http://www.multunus.com/blog/2016/02/noobs-walkthrough-re-frame-app/)
+
+[ClojureScript Unraveled](http://funcool.github.io/clojurescript-unraveled/)
+
+[ClojureScript + React Native](http://cljsrn.org/)
+
+[React Native with Clojurescript](https://github.com/gphilipp/react-native-with-clojurescrip)
 
 # Github Projects  
 [ventas e-commerce](https://github.com/JoelSanchez/ventas)
