@@ -1,4 +1,4 @@
-# Learn ClojureScript
+# Learning ClojureScript
 
 [ClojureScript](https://clojurescript.org/) is a compiler of [Clojure](learning_clojure.md) that has [interop with Javascript](https://kanaka.github.io/clojurescript/web/synonym.html)
 

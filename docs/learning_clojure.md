@@ -1,4 +1,4 @@
-# Learnig Clojure
+# Learning Clojure
 
 [Clojure](https://clojure.org/) is a dialect of Lisp that has [interop with Java](https://clojure.org/reference/java_interop)
 
