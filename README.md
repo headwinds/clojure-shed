@@ -5,13 +5,11 @@
 
 ## Requirements
 
-```
-$ brew install [clojure](https://clojure.org/)     
-$ brew install [java](https://java.com/en/download/)      
-$ brew install [leiningen](https://leiningen.org/)      
-```
+- install [clojure](https://clojure.org/)     
+- install [java](https://java.com/en/download/)      
+- install [leiningen](https://leiningen.org/)      
 
-## Getting Started Part 1 Clojure & Clojurescript
+## Getting Started Part 1: Clojure & Clojurescript
 
 #### Focus on Clojure
 
@@ -48,6 +46,8 @@ $ cd shed
 $ lein run
 ```
 
+You should see this screen in your browser:
+
 Open the browser to http://localhost:3000
 
 ![alt text](progress/clojure.png)
@@ -60,9 +60,11 @@ $ lein figwheel
 
 Then return to the previous tab and run: ```$ lein run``` again
 
+You should see this screen in your browser:
+
 ![alt text](progress/clojurescript.png)
 
-## Getting Started Part 2 Add PostgreSQL
+## Getting Started Part 2: Add PostgreSQL
 
 ## Docker
 
@@ -85,8 +87,6 @@ I need help here - I've deployed a Python API to Zeit via docker and it should -
 If you have an advice, let's discuss it in this issue thread.
 
 #### [Heroku](https://heroku.com)
-
-
 
 For more information about using Clojure on Heroku, see these Dev Center articles:
 
