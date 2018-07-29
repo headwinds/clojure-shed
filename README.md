@@ -64,9 +64,11 @@ You should see this screen in your browser:
 
 ![alt text](progress/clojurescript.png)
 
-## Getting Started Part 2: Add PostgreSQL
+## Getting Started Part 2: Add PostgreSQL *coming soon*
 
-## Docker
+see [yogthos memory-lane](https://github.com/yogthos/memory-hole)
+
+## Deploy with Docker *coming soon*
 
 Edit the docker file to ensure that it builds the uberjar
 
@@ -74,9 +76,7 @@ Edit the docker file to ensure that it builds the uberjar
 lein uberjar
 ```
 
-## Deploy with Docker - *Not ready yet!*
-
-#### [Zeit.co](https://zeit.co) - hopefully coming soon - skip to Heroku
+#### Zeit - hopefully coming soon - skip to Heroku
 
 ```
 $ now
@@ -86,7 +86,7 @@ I need help here - I've deployed a Python API to Zeit via docker and it should -
 
 If you have an advice, let's discuss it in this issue thread.
 
-#### [Heroku](https://heroku.com)
+#### Heroku
 
 For more information about using Clojure on Heroku, see these Dev Center articles:
 
@@ -95,7 +95,7 @@ For more information about using Clojure on Heroku, see these Dev Center article
 
 ## Credit
 
-I wanted to learn how to put together a clojure project so I basically dismantled [yogthos memory-lane](https://github.com/yogthos/memory-hole) to build this project.
+I wanted to learn how to put together a Clojure & Clojurescript project so I basically started by dismantling [yogthos memory-lane](https://github.com/yogthos/memory-hole) to build this project.
 
 ## Resources
 
