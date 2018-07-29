@@ -1,5 +1,5 @@
-# closure-shed
-a simple API to store stuff using Closure, Leiningen, Docker, and PostgreSQL deployed to zeit
+# clojure-shed
+a simple API to store stuff using Clojure, Leiningen, Docker, and PostgreSQL deployed to zeit
 
 
 ## Getting Started
