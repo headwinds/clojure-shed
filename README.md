@@ -128,7 +128,7 @@ I wanted to learn how to put together a Clojure & Clojurescript project so I bas
 
 [Flashcards](https://github.com/alexanderjamesking/flashcards)
 
-[etudes for sclojurescript](https://github.com/jdeisenberg/etudes-for-clojurescript)
+[etudes for clojurescript](https://github.com/jdeisenberg/etudes-for-clojurescript)
 
 ## clojurians
 [beginners](https://clojurians-log.clojureverse.org/beginners/2017-11-01)
