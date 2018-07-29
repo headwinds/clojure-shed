@@ -9,8 +9,8 @@ learn how to build a simple API to store stuff using Clojure, Clojurescript, Lei
 
 If you are on a Mac, it's best to install each with [brew](https://brew.sh/)     
 
-- review my guide to [learning Clojure](docs/learning_clojure.mod)
-- review my guide to [learning Clojurescript](docs/learning_clojurescript.mod)
+- review my guide to [learning Clojure](https://github.com/headwinds/clojure-shed/tree/master/docs/learning_clojure.mod)
+- review my guide to [learning Clojurescript](https://github.com/headwinds/clojure-shed/tree/master/docs/learning_clojurescript.mod)
 
 ## Getting Started
 
