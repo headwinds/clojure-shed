@@ -13,7 +13,7 @@
 
 #### Focus on Clojure
 
-Although the goal is to eventually deploy to Zeit, for now (until we figure that out) let's deploy to Heroku since they have created a sample ["hello world" Clojure project]((https://devcenter.heroku.com/articles/getting-started-with-clojure) which makes it incredibly easy to do so.
+Although the goal is to eventually deploy to Zeit, for now (until we figure that out) let's deploy to Heroku since they have created a sample ["hello world" Clojure project](https://devcenter.heroku.com/articles/getting-started-with-clojure) which makes it incredibly easy to do so.
 
 ```
 $ git clone https://github.com/heroku/clojure-getting-started.git
@@ -74,7 +74,7 @@ Edit the docker file to ensure that it builds the uberjar
 lein uberjar
 ```
 
-## Deploy
+## Deploy with Docker - *Not ready yet!*
 
 #### [Zeit.co](https://zeit.co) - hopefully coming soon - skip to Heroku
 
