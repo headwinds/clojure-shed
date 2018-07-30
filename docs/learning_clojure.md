@@ -43,6 +43,8 @@ So I can see "hello world" - nice! - but how do I [add static resources like css
 
 [4clojure](http://www.4clojure.com/)
 
+[Compojure Address Book Part 1](http://www.jarrodctaylor.com/posts/Compojure-Address-Book-Part-1/)
+
 ## clojurians
 [beginners](https://clojurians-log.clojureverse.org/beginners/2017-11-01)
 
