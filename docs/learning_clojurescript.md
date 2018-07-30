@@ -2,11 +2,15 @@
 
 [ClojureScript](https://clojurescript.org/) is a compiler of [Clojure](learning_clojure.md) that has [interop with Javascript](https://kanaka.github.io/clojurescript/web/synonym.html)
 
+## Figwheel
+
 If you have developed with create-react-app, you know how easy it is to get up and running building apps with instant feedback.
 
 Wouldn't it be nice to get Hot Module Reloading working too with Clojurescript too? Figwheel [figwheel](https://github.com/bhauman/lein-figwheel) provides HMR so that we can see our changes as soon as we save.
 
 Let's start a new project and build this [quick start figwheel](https://github.com/bhauman/lein-figwheel/wiki/Quick-Start) app.
+
+## Reagent & Re-frame
 
 You have built several React & Redux projects and now wish to learn the equivalent in Clojurescript which is [Reagent](https://reagent-project.github.io/) & [Re-frame](https://github.com/Day8/re-frame).  
 
