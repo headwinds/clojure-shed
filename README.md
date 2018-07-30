@@ -1,5 +1,5 @@
 # clojure-shed
-learn how to build a simple API to store stuff using Clojure, Clojurescript, Leiningen, Docker, and PostgreSQL deployed to Zeit or Heroku
+learn how to build a simple API to store stuff securely using Clojure, Clojurescript, Leiningen, Docker, Crypto, and PostgreSQL deployed to Zeit or Heroku
 
 ## Requirements
 
