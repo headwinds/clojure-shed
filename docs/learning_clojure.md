@@ -33,12 +33,9 @@ So I can see "hello world" - nice! - but how do I [add static resources like css
 
 
 ## how to
-
 [how do I add images?](https://stackoverflow.com/questions/7836030/compojure-access-filesystem)
 
-
 ## tutorials
-
 [Clojure web apps: Zero to 'Hello World' on Heroku in Clojure in 15 minutes.](https://adambard.com/blog/Getting-started-with-Clojure-web-apps/)
 
 [4clojure](http://www.4clojure.com/)
@@ -53,6 +50,9 @@ So I can see "hello world" - nice! - but how do I [add static resources like css
 
 ## RSS
 [elfeed-cljsrn](https://github.com/areina/elfeed-cljsrn)
+
+## Books
+[Clojure for the Brave and True](https://www.braveclojure.com/clojure-for-the-brave-and-true/)
 
 ## Creator of Clojure
 [Rich Hickey](https://www.infoq.com/profile/Rich-Hickey)
