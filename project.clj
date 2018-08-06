@@ -50,7 +50,7 @@
   :source-paths ["src/clj" "src/cljc"]
   :resource-paths ["resources" "target/cljsbuild"]
   :target-path "target/%s/"
-  :main ^:skip-aot closure-shed.core
+  :main ^:skip-aot clojure-shed.core
   :migratus {:store :database
              :db ~(get (System/getenv) "DATABASE_URL")
              :migration-dir "migrations/postgresql"}
@@ -87,7 +87,7 @@
 
 
              :aot :all
-             :uberjar-name "closure-shed.jar"
+             :uberjar-name "clojure-shed.jar"
              :source-paths ["env/prod/clj"]
              :resource-paths ["env/prod/resources"]}
 
@@ -111,7 +111,7 @@
                    {:app
                     {:source-paths ["src/cljs" "src/cljc" "env/dev/cljs"]
                      :compiler
-                     {:main "closure_shed.app"
+                     {:main "clojure_shed.app"
                       :asset-path "/js/out"
                       :output-to "target/cljsbuild/public/js/app.js"
                       :output-dir "target/cljsbuild/public/js/out"
@@ -135,7 +135,7 @@
                     {:source-paths ["src/cljc" "src/cljs" "test/cljs"]
                      :compiler
                      {:output-to "target/test.js"
-                      :main "closure_shed.doo-runner"
+                      :main "clojure_shed.doo-runner"
                       :optimizations :whitespace
                       :pretty-print true}}}}
 
