@@ -31,6 +31,11 @@ $ heroku open
 
 So I can see "hello world" - nice! - but how do I [add static resources like css and images](https://nelsonmorris.net/2015/06/01/how-does-serving-html-css-and-javascript-fit-in-a-clojure-web-app.html)?
 
+You can also view your logs which are a "stream of time-ordered events aggregated from the output streams of all your app and Heroku components, providing a single channel for all of the events"
+
+```
+heroku logs --tail
+```
 
 ## how to
 [how do I add images?](https://stackoverflow.com/questions/7836030/compojure-access-filesystem)

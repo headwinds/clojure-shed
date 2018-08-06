@@ -1,4 +1,4 @@
-(ns clojure-getting-started.web
+(ns app.web
   (:require [compojure.core :refer [defroutes GET PUT POST DELETE ANY]]
             [compojure.handler :as handler :refer [site]]
             [compojure.route :as route]
@@ -16,11 +16,11 @@
             :password "Bedford22"})
 
 (def pg-heroku-uri
-  {:connection-uri (str "postgresql://postgres:Bedford22@localhost:5432/shed"
+  {:connection-uri (str "postgresql://postgres:your-password-here@localhost:5432/shed"
                         "?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory")})
 
 (def pg-uri
-  {:connection-uri (str "postgresql://postgres:Bedford22@localhost:5432/shed")})
+  {:connection-uri (str "postgresql://postgres:your-password-here@localhost:5432/shed")})
 
 (defn get-colonists
   []

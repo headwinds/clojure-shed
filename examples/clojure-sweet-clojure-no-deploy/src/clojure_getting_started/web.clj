@@ -13,14 +13,14 @@
             :host "localhost"
             :port "5432"
             :user "postgres"
-            :password "Bedford22"})
+            :password "your-password-here"})
 
 (def pg-heroku-uri
-  {:connection-uri (str "postgresql://postgres:Bedford22@localhost:5432/shed"
+  {:connection-uri (str "postgresql://postgres:your-password-here@localhost:5432/shed"
                         "?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory")})
 
 (def pg-uri
-  {:connection-uri (str "postgresql://postgres:Bedford22@localhost:5432/shed")})
+  {:connection-uri (str "postgresql://postgres:your-password-here@localhost:5432/shed")})
 
 (defn get-colonists
   []

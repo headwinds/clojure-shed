@@ -1,6 +1,6 @@
 # clojure-shed
 * learn how to build a simple API to store stuff securely using Clojure, Clojurescript, Leiningen, Docker, Crypto, and PostgreSQL deployed to Zeit or Heroku
-* fantasize about colonizing mars
+* fantasize about colonizing mars and decide what essentials we'd bring along on our trip
 
 ## Learning process
 
@@ -9,7 +9,7 @@ If this repo is meant to teach, it needs to support incremental learning and bre
 ## Examples
 
 * level 1 clojure docker-compose - in-progress
-* level 2 clojure docker-compose PostgreSQL - in-progress 
+* level 2 clojure docker-compose PostgreSQL - in-progress
 * level 3 clojure clojurescript docker PostgreSQL - to do
 
 ## Requirements
