@@ -20,4 +20,12 @@ Total 6
                [org.clojure/java.jdbc "0.6.1"]
                [org.postgresql/postgresql "9.4-1201-jdbc41"]
                [hiccup "1.0.5"]]
-```               
+```  
+
+## Getting started
+
+```
+$ lein repl
+$ user=> (require 'app.web)
+$ user=> (def server (app.web/-main))
+```             
