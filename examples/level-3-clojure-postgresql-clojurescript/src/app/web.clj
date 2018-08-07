@@ -1,4 +1,4 @@
-(ns clojure-getting-started.web
+(ns app.web
   (:require [compojure.core :refer [defroutes GET PUT POST DELETE ANY]]
             [compojure.handler :as handler :refer [site]]
             [compojure.route :as route]
@@ -26,16 +26,6 @@
   []
   (j/query pg-db
     ["select * from colonist"]))
-
-                        ;;(j/insert-multi! mysql-db :fruit
-                        ;;  [{:name "Apple" :appearance "rosy" :cost 24}
-                        ;;   {:name "Orange" :appearance "round" :cost 49}])
-                        ;; ({:generated_key 1} {:generated_key 2})
-
-                        ;;(j/query mysql-db
-                        ;;  ["select * from fruit where appearance = ?" "rosy"]
-                        ;;  {:row-fn :cost})
-                        ;; (24)
 
 (defn splash []
   {:status 200
@@ -70,9 +60,3 @@
 (defn -main [& [port]]
   (let [port (Integer. (or port (env :port) 5000))]
     (jetty/run-jetty (site #'app) {:port port :join? false})))
-
-
-
-;; For interactive development:
-;; (.stop server)
-;; (def server (-main))

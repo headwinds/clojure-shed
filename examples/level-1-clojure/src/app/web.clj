@@ -8,24 +8,36 @@
             [ring.middleware.json :as middleware]
             [environ.core :refer [env]]))
 
-(def pg-db {:dbtype "postgresql"
-            :dbname "shed"
-            :host "localhost"
-            :port "5432"
-            :user "postgres"
-            :password "your-password-here"})
+;;-- DATA
 
-(def pg-heroku-uri
-  {:connection-uri (str "postgresql://postgres:your-password-here@localhost:5432/shed"
-                        "?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory")})
-;; doesn't work
-(def pg-uri
-  {:connection-uri (str "postgresql://postgres:your-password-here@localhost:5432/shed")})
+(defonce colonists
+  [ {:name "Sally Ride"        :profession "astronaunt"         :agency "???"}
+    {:name "Mae Jemison"       :profession "astronaunt"         :agency "???"}
+    {:name "Nancy Grace Roman" :profession "astronomer"         :agency "???"}
+    {:name "Margaret Hamilton" :profession "computer scientist" :agency "???"}]);
 
-(defn get-colonists
-  []
-  (j/query pg-db
-    ["select * from colonist"]))
+;;-- CALLS
+
+(defn get-colonists []
+  {:status 200
+    :body colonists})
+
+(defn map-colonists-to-agency
+  [agency-name]
+  (let [colonists-with-agency
+    (map (fn [value] {:name (value :name) :profession (value :profession) :agency agency-name})
+      colonists)]
+  (println "agency" agency-name)
+  {:status 200
+   :body colonists-with-agency}))
+
+(defn filter-colonists [] )
+
+(defn find-colonist [] )
+
+;; you could try rewriting the signature to accept language first,
+;; then do `(reduce (partial reduce-map lang :english) {} all)`
+(defn reduce-colonists [] )
 
 (defn splash []
   {:status 200
@@ -45,6 +57,11 @@
        :desc (str "The name you sent to me was " name)}}))
   (GET "/lego-blockchain" []
         (route/not-found (slurp (io/resource "lego-blockchain.html"))))
+  (POST "/map-colonists-to-agency" request
+    (let [agency-name (or  (get-in request [:params :name])
+                      (get-in request [:body :name])
+                      "Space X")]
+       (map-colonists-to-agency agency-name)))
   (GET "/get-colonists" []
        (get-colonists))
   (GET "/test" []

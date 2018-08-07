@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>experiments</title>
+   <link rel="stylesheet" type="text/css" href="/level-1-style.css">
+</head>
+
+<body>
+  <!-- TODO: replace this with something that matches your app style -->
+<div class="wrapper">
+  <h1 class='home'>Functional Programming</h1>
+  <p>a common task in programming in manipulating lists.
+    We can use functions such as map, filter, and reduce to transform existing lists into new lists.
+  </p>
+  <p>
+    For instance, in this experiment featuring the
+    <a href="https://www.businessinsider.com/lego-women-nasa-scientists-astronauts-kit-2017-10" target="_blank">women of NASA lego set</a>,
+    we transform a list of colonists and prepare them for space flight.
+  </p>
+
+  <div>
+    <h2 class='home_sub'>Map</h2>
+    <div id="lego-box">
+
+      <img src="/civilians.jpg" width="300px" />
+    </div>
+    <div>
+      Let's update this list to show that these women work at NASA
+    </div>
+    <div id="map-results"></div>
+    <div>
+      <button id="btn" onclick="mapColonists()">map astronauts</button>
+    </div>
+  </div>
+
+  <hr />
+
+  <div>
+    <h2 class='home_sub'>Filter</h2>
+    <div id="lego-box">
+        <img src="/plans.jpg" width="200px" />
+    </div>
+    <div id="filter-results">
+
+
+    </div>
+    <div>
+      <button id="btn" onclick="getColonists()">filter astronauts</button>
+    </div>
+  </div>
+
+  <hr />
+
+  <div>
+    <h2 class='home_sub'>Find</h2>
+    <div id="lego-box">
+      <img src="/rover.png" width="200px" />
+    </div>
+    <div>
+      Who should we send to space?
+    </div>
+    <div>
+      <button id="btn" onclick="getColonists()">filter astronauts</button>
+    </div>
+  </div>
+
+  <hr />
+
+  <div>
+    <h2 class='home_sub'>Reduce</h2>
+    <div id="lego-box">
+      <img src="/astronaunt.jpg" width="200px" />
+    </div>
+    <div>
+      Who should we send to space?
+    </div>
+    <div>
+      <button id="btn" onclick="getColonists()">filter astronauts</button>
+    </div>
+  </div>
+
+
+</div>
+  <script>
+
+  const updateMapResults = response => {
+    const mapResults = document.getElementById("map-results");
+
+    let results = "<ul>";
+    response.map(colonist => {
+      const li = `<li>${colonist.name} - ${colonist.profession} - ${colonist.agency}</li>`;
+      results += li;
+      })
+    results += "</ul>";
+
+    mapResults.innerHTML = results;
+  }
+
+  const mapColonists = () => {
+
+    const data = {name: "NASA"};
+
+    const config = {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, same-origin, *omit
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
+    }
+
+    fetch('/map-colonists-to-agency', config)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(colonistsWithAgencies) {
+        console.log("response: " , colonistsWithAgencies);
+        updateMapResults(colonistsWithAgencies)
+      });
+  }
+
+  const getColonists = () => {
+    fetch('/get-colonists')
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(colonists) {
+
+        updateMapResults(colonists)
+      });
+  }
+
+  getColonists();
+
+  </script>
+</body>
+</html>
