@@ -6,11 +6,13 @@
 
 If this repo is meant to teach, it needs to support incremental learning and break up the project into smaller projects which gradually introduce new libraries. The first example project has 6 libraries, and then each subsequent example will add no more than 4 libraries.
 
-## Examples
+## Lessons
 
-* level 1 clojure docker-compose - in-progress
-* level 2 clojure docker-compose PostgreSQL - in-progress
-* level 3 clojure clojurescript docker PostgreSQL - to do
+* lesson 1 Clojure - map, filter, find, reduce - in-progress
+* lesson 2 Clojure PostgreSQL - in-progress
+* lesson 3 Clojure PostgreSQL ClojureScript  - to do
+* lesson 4 Clojure PostgreSQL ClojureScript Docker - to do
+* lesson 5 Clojure PostgreSQL ClojureScript Docker Crypto - to do
 
 ## Requirements
 

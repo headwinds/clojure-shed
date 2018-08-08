@@ -1,4 +1,6 @@
+# Lesson 1 Clojure
 
+Learn how to make a few Clojure service calls and see how one can transform lists using map, filter, find, and reduce on the server.
 
 # dependencies
 
@@ -33,8 +35,19 @@ $ user=> (def server (app.web/-main))
 ???
 ```      
 
-## Sample Post Request
+## Sample Route Handler & Request
 
+handler
+```
+(POST "/map-colonists-to-agency" request
+  (let [agency-name (or  (get-in request [:params :name])
+                    (get-in request [:body :name])
+                    "SpaceX")]
+```
+
+Within this request, you can see the `:body` map which is a nested map with the `:name` property containing "NASA". If it failed to find the name, it would default to "SpaceX".
+
+request
 ```
 {
 :ssl-client-cert nil,

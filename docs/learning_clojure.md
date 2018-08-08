@@ -52,6 +52,8 @@ heroku logs --tail
 
 ## Podcasts
 [lispcast](https://lispcast.com/)
+[cognitect](http://blog.cognitect.com/cognicast/)
+[workflow with Stuart Sierra](http://thinkrelevance.com/blog/2013/05/29/stuart-sierra-episode-032)
 
 ## RSS
 [elfeed-cljsrn](https://github.com/areina/elfeed-cljsrn)

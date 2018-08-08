@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Kelly+Slab');
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif');
 
+
+
 body {
     font-family: "Noto Serif", helvetica, sans-serif;
     margin: 0px;
@@ -57,3 +59,5 @@ button {
   font-size: 14px;
   outline: 'none';
 }
+
+button:focus {outline:0 !important;}
