@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>experiments</title>
-   <link rel="stylesheet" type="text/css" href="/level-1-style.css">
+   <link rel="stylesheet" type="text/css" href="/css/level-1-style.css">
 </head>
 
 <body>
@@ -22,13 +22,27 @@
   <div>
     <h2 class='home_sub'>Map</h2>
     <div id="lego-box">
-
-      <img src="/civilians.jpg" width="300px" />
+      <img src="/imgs/civilians.jpg" width="300px" />
+      <img src="/imgs/rachael.jpg" width="90px" />
+      <img src="/imgs/cockateil.jpg" width="70px" />
     </div>
     <div>
       Let's update this list to show that these women work at NASA
     </div>
     <div id="map-results"></div>
+    <div>
+      <h2 class='home_sub'>Clojure</h2>
+      <xmp>
+(defn map-scientists-to-agency
+  "returns a list of scientists adding their agency"
+  [agency-name]
+  (let [scientists-with-agency
+    (map (fn [value] {:name (value :name) :profession (value :profession) :agency agency-name})
+      scientists)]
+  {:status 200
+   :body scientists-with-agency}))
+      </xmp>
+    </div>
     <div>
       <button id="btn" onclick="mapScientists()">map scientists</button>
     </div>
@@ -39,12 +53,24 @@
   <div>
     <h2 class='home_sub'>Filter</h2>
     <div id="lego-box">
-        <img src="/plans.jpg" width="200px" />
+        <img src="/imgs/plans.jpg" width="200px" />
     </div>
     <div>
       Who should we send to space?
     </div>
     <div id="filter-results"></div>
+    <div>
+    <h2 class='home_sub'>Clojure</h2>
+    <xmp>
+(defn filter-scientists-by-profession
+  "returns a list of scientists filtered by profession"
+     [field profession scientists-with-agency]
+     (let [scientists-filtered-by-profession
+       (filter #(= (str/lower-case profession) (str/lower-case (field %))) scientists-with-agency)]
+     {:status 200
+      :body scientists-filtered-by-profession}))
+    </xmp>
+  </div>
     <div>
       <button id="btn" onclick="filterScientists()">filter astronauts</button>
     </div>
@@ -62,6 +88,20 @@
     </div>
     <div id="find-results"></div>
     <div>
+    <h2 class='home_sub'>Clojure</h2>
+    <xmp>
+(defn find-scientist
+  "returns the first scientist matching these profession and age arguments"
+     [profession specialty]
+     (let [found-scientist
+             (first (filter (every-pred (comp #{specialty} :specialty)
+                                        (comp #{profession} :profession))
+                                        scientists))]
+     {:status 200
+      :body found-scientist}))
+    </xmp>
+  </div>
+    <div>
       <button id="btn" onclick="findScientist()">find computer scientist</button>
     </div>
   </div>
@@ -72,12 +112,37 @@
     <h2 class='home_sub'>Reduce</h2>
     <div id="lego-box">
       <img src="/vehicle.jpg" width="200px" />
+      <img src="/vehicle.jpg" width="200px" />
     </div>
     <div>
-      Let's build a crew list and split the scientists between two vechiles
+      Let's build a crew map move the scientists onto two vechiles
+    </div>
+    <div id="reduce-results">
+      <div>
+        <h2 class='home_sub'>Vehicle 1</h2>
+        <div id="reduce-1-results">???</div>
+      </div>
+      <div>
+        <h2 class='home_sub'>Vehicle 2</h2>
+        <div id="reduce-2-results">???</div>
+      </div>
     </div>
     <div>
-      <button id="btn" onclick="getScientists()">reduce scientists</button>
+    <h2 class='home_sub'>Clojure</h2>
+    <xmp>
+  (defn find-scientist
+    "returns the first scientist matching these profession and age arguments"
+       [profession specialty]
+       (let [found-scientist
+               (first (filter (every-pred (comp #{specialty} :specialty)
+                                          (comp #{profession} :profession))
+                                          scientists))]
+       {:status 200
+        :body found-scientist}))
+    </xmp>
+  </div>
+    <div>
+      <button id="btn" onclick="reduceScientists()">reduce scientists</button>
     </div>
   </div>
 
@@ -176,7 +241,7 @@
 
   const findScientist = () => {
 
-    const data = {profession: "Computer Scientist", age: 23};
+    const data = {profession: "Computer Scientist", specialty: "Data Visualization"};
 
     const config = {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -200,6 +265,38 @@
         console.log("find response: " , foundScientist);
         foundScientist["agency"] = "NASA";
         updateDomWithResults([foundScientist], "find-results")
+      });
+  }
+
+  //- REDUCE ------------------------------
+
+  const reduceScientists = () => {
+    fetch('/reduce-scientists')
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(scientistsNotReadyYet) {
+
+        // scientits is a nested object so let's convert it to an array to display
+        /*
+        this what I want to build in clojure as have failed to do so far
+        */
+
+        const scientists = [
+          { ship: "apollo",
+            crew: [ {name: "A", profession: "Astronaunt", agency: "NASA"},
+                  {name: "B", profession: "Astronaunt", agency: "NASA"}]
+          },
+          { ship: "dragon",
+            crew: [ {name: "A", profession: "Astronaunt", agency: "NASA"},
+                  {name: "B", profession: "Astronaunt", agency: "NASA"}]
+          }];
+
+        let displayScientistsInShipA = scientists[0]
+        let displayScientistsInShipB = scientists[1]
+
+        updateDomWithResults(displayScientistsInShipA.crew, "reduce-1-results")
+        updateDomWithResults(displayScientistsInShipB.crew, "reduce-2-results")
       });
   }
 

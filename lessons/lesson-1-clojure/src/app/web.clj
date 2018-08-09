@@ -13,11 +13,11 @@
 
 ;; scientists is a vector of maps - I made up their ages
 (defonce scientists
-  [ {:name "Sally Ride"        :profession "Astronaunt"         :agency "???"   :age 58}
-    {:name "Mae Jemison"       :profession "Astronaunt"         :agency "???"   :age 26}
-    {:name "Nancy Grace Roman" :profession "Astronomer"         :agency "???"   :age 32}
-    {:name "Margaret Hamilton" :profession "Computer Scientist" :agency "???"   :age 29}
-    {:name "Rachel Binx"       :profession "Computer Scientist" :agency "???"   :age 23 }]);
+  [ {:name "Sally Ride"        :profession "Astronaunt"         :agency "???"   :age 58 :specialty "Physics" :ship 2}
+    {:name "Mae Jemison"       :profession "Astronaunt"         :agency "???"   :age 35 :specialty "Physician" :ship 1}
+    {:name "Nancy Grace Roman" :profession "Astronomer"         :agency "???"   :age 32 :specialty "Hubble" :ship 1}
+    {:name "Margaret Hamilton" :profession "Computer Scientist" :agency "???"   :age 29 :specialty "Systems Engineer" :ship 1}
+    {:name "Rachel Binx"       :profession "Computer Scientist" :agency "???"   :age 23 :specialty "Data Visualization" :ship 2 }]);
 
 ;; -- HANDLERS -------------------------------------------------------------
 
@@ -52,10 +52,10 @@
 ;; https://stackoverflow.com/questions/42643091/how-to-filter-vector-of-maps-by-multiple-keys-in-clojure?rq=1
 (defn find-scientist
   "returns the first scientist matching these profession and age arguments"
-     [profession age]
+     [profession specialty]
      (let [found-scientist
-             (first (filter (every-pred (comp #{age} :age)
-                                 (comp #{profession} :profession))
+             (first (filter (every-pred (comp #{specialty} :specialty)
+                                        (comp #{profession} :profession))
                                         scientists))]
      {:status 200
       :body found-scientist}))
@@ -65,7 +65,20 @@
 
 ;; you could try rewriting the signature to accept language first,
 ;; then do `(reduce (partial reduce-map lang :english) {} all)`
-(defn reduce-scientists [] )
+(defn reduce-scientists []
+  (let [crew
+          (reduce
+            (fn [acc val]
+              (assoc acc (:ship val)
+                 (concat (acc (:ship val))
+                        {:profession (val :profession) :name (val :name) :agency "NASA"} ;; replace this :English
+                 )
+              )
+            )
+        {} scientists)]
+  (println "crew" crew)
+  {:status 200
+    :body crew}))
 
 (defn splash []
   {:status 200
@@ -84,8 +97,8 @@
        :body {:name name
        :desc (str "The name you sent to me was " name)}}))
 
-  (GET "/lego-blockchain" []
-        (route/not-found (slurp (io/resource "lego-blockchain.html"))))
+  (GET "/lesson-1" []
+        (route/not-found (slurp (io/resource "lesson-1.html"))))
 
   (POST "/map-scientists-to-agency" request
     (let [agency-name (or   (get-in request [:params :name])
@@ -101,13 +114,18 @@
 
   (POST "/find-scientist" request
          (let [profession (get-in request [:body :profession])
-               age (get-in request [:body :age])]
-            (find-scientist profession age)))
+               specialty (get-in request [:body :specialty])]
+            (find-scientist profession specialty)))
 
   (GET "/get-scientists" []
        (get-scientists))
+
   (GET "/test" []
        (splash))
+
+  (GET "/reduce-scientists" []
+        (reduce-scientists))
+
   (ANY "*" []
        (route/not-found (slurp (io/resource "404.html")))))
 

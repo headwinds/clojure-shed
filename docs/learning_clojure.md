@@ -47,6 +47,9 @@ heroku logs --tail
 
 [Compojure Address Book Part 1](http://www.jarrodctaylor.com/posts/Compojure-Address-Book-Part-1/)
 
+[Clojure Collections](https://purelyfunctional.tv/guide/clojure-collections)
+
+
 ## clojurians
 [beginners](https://clojurians-log.clojureverse.org/beginners/2017-11-01)
 
