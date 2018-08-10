@@ -2,6 +2,7 @@
   (:require [compojure.core :refer [defroutes GET PUT POST DELETE ANY]]
             [compojure.handler :as handler :refer [site]]
             [compojure.route :as route]
+            [clojure.core :as cc]
             [clojure.string :as str]
             [clojure.java.jdbc :as j]
             [clojure.java.io :as io]
@@ -17,7 +18,7 @@
     {:name "Mae Jemison"       :profession "Astronaunt"         :agency "???"   :age 35 :specialty "Physician" :ship 1}
     {:name "Nancy Grace Roman" :profession "Astronomer"         :agency "???"   :age 32 :specialty "Hubble" :ship 1}
     {:name "Margaret Hamilton" :profession "Computer Scientist" :agency "???"   :age 29 :specialty "Systems Engineer" :ship 1}
-    {:name "Rachel Binx"       :profession "Computer Scientist" :agency "???"   :age 23 :specialty "Data Visualization" :ship 2 }]);
+    {:name "Rachel Binx"       :profession "Computer Scientist" :agency "???"   :age 23 :specialty "Data Visualization" :ship 2 }])
 
 ;; -- HANDLERS -------------------------------------------------------------
 
@@ -27,12 +28,15 @@
 
 ;; -- MAP --
 
+(defn map-scientists [agency-name]
+  (map (fn [value] (assoc value :agency agency-name))
+    scientists)
+  )
+
 (defn map-scientists-to-agency
   "returns a list of scientists adding their agency"
   [agency-name]
-  (let [scientists-with-agency
-    (map (fn [value] {:name (value :name) :profession (value :profession) :agency agency-name})
-      scientists)]
+  (let [scientists-with-agency (map-scientists agency-name)]
   {:status 200
    :body scientists-with-agency}))
 
@@ -60,23 +64,31 @@
      {:status 200
       :body found-scientist}))
 
+;; -- FILTER BUILD FLEET --
+
+(defn filter-crew [staff ship-id] (filter #(= (:ship %) ship-id) staff))
+
+(def nasa-scientists (map-scientists "NASA"))
+
+(println "nasa" nasa-scientists)
+
+(def fleet [{:ship "apollo" :crew (filter-crew nasa-scientists 1)}
+            {:ship "dragon" :crew (filter-crew nasa-scientists 2)}])
+
+(defn get-fleet []
+  {:status 200
+   :body fleet})
 
 ;; -- REDUCE --
 
-;; you could try rewriting the signature to accept language first,
-;; then do `(reduce (partial reduce-map lang :english) {} all)`
 (defn reduce-scientists []
   (let [crew
           (reduce
             (fn [acc val]
-              (assoc acc (:ship val)
-                 (concat (acc (:ship val))
-                        {:profession (val :profession) :name (val :name) :agency "NASA"} ;; replace this :English
-                 )
-              )
+              ;; coming soon
+               acc
             )
-        {} scientists)]
-  (println "crew" crew)
+        [] scientists)]
   {:status 200
     :body crew}))
 
@@ -122,6 +134,9 @@
 
   (GET "/test" []
        (splash))
+
+  (GET "/get-fleet" []
+      (get-fleet))
 
   (GET "/reduce-scientists" []
         (reduce-scientists))

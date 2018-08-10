@@ -81,7 +81,7 @@
   <div>
     <h2 class='home_sub'>Find</h2>
     <div id="lego-box">
-      <img src="/rover.png" width="200px" />
+      <img src="/imgs/rover.png" width="200px" />
     </div>
     <div>
       Who should we assign to visualize Rover data?
@@ -109,40 +109,39 @@
   <hr />
 
   <div>
-    <h2 class='home_sub'>Reduce</h2>
+    <h2 class='home_sub'>Filter: Build Fleet</h2>
     <div id="lego-box">
-      <img src="/vehicle.jpg" width="200px" />
-      <img src="/vehicle.jpg" width="200px" />
+      <img src="/imgs/vehicle.jpg" width="200px" />
+      <img src="/imgs/vehicle.jpg" width="200px" />
     </div>
     <div>
       Let's build a crew map move the scientists onto two vechiles
     </div>
-    <div id="reduce-results">
+    <div>
       <div>
         <h2 class='home_sub'>Vehicle 1</h2>
-        <div id="reduce-1-results">???</div>
+        <div id="fleet-1-results">???</div>
       </div>
       <div>
         <h2 class='home_sub'>Vehicle 2</h2>
-        <div id="reduce-2-results">???</div>
+        <div id="fleet-2-results">???</div>
       </div>
     </div>
     <div>
     <h2 class='home_sub'>Clojure</h2>
     <xmp>
-  (defn find-scientist
-    "returns the first scientist matching these profession and age arguments"
-       [profession specialty]
-       (let [found-scientist
-               (first (filter (every-pred (comp #{specialty} :specialty)
-                                          (comp #{profession} :profession))
-                                          scientists))]
-       {:status 200
-        :body found-scientist}))
+  (defn filter-crew [staff ship-id] (filter #(= (:ship %) ship-id) staff))
+
+  (def fleet [{:ship "apollo" :crew (filter-crew scientists 1)}
+              {:ship "dragon" :crew (filter-crew scientists 2)}])
+
+  (defn get-fleet []
+    {:status 200
+     :body fleet})
     </xmp>
   </div>
     <div>
-      <button id="btn" onclick="reduceScientists()">reduce scientists</button>
+      <button id="btn" onclick="getFleet()">filter create crews</button>
     </div>
   </div>
 
@@ -268,6 +267,23 @@
       });
   }
 
+  //- FILTER BUILD FLET -------------------
+
+  const getFleet = () => {
+    fetch('/get-fleet')
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(fleet) {
+
+        let displayScientistsInShipA = fleet[0]["crew"]
+        let displayScientistsInShipB = fleet[1]["crew"]
+
+        updateDomWithResults(displayScientistsInShipA, "fleet-1-results")
+        updateDomWithResults(displayScientistsInShipB, "fleet-2-results")
+      });
+  }
+
   //- REDUCE ------------------------------
 
   const reduceScientists = () => {
@@ -276,27 +292,7 @@
         return response.json();
       })
       .then(function(scientistsNotReadyYet) {
-
-        // scientits is a nested object so let's convert it to an array to display
-        /*
-        this what I want to build in clojure as have failed to do so far
-        */
-
-        const scientists = [
-          { ship: "apollo",
-            crew: [ {name: "A", profession: "Astronaunt", agency: "NASA"},
-                  {name: "B", profession: "Astronaunt", agency: "NASA"}]
-          },
-          { ship: "dragon",
-            crew: [ {name: "A", profession: "Astronaunt", agency: "NASA"},
-                  {name: "B", profession: "Astronaunt", agency: "NASA"}]
-          }];
-
-        let displayScientistsInShipA = scientists[0]
-        let displayScientistsInShipB = scientists[1]
-
-        updateDomWithResults(displayScientistsInShipA.crew, "reduce-1-results")
-        updateDomWithResults(displayScientistsInShipB.crew, "reduce-2-results")
+        // coming soon
       });
   }
 

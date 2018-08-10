@@ -1,12 +1,15 @@
 # clojure-shed
-* learn how to build a simple API to store stuff securely using Clojure, Clojurescript, Leiningen, Docker, Crypto, and PostgreSQL deployed to Zeit or Heroku
-* fantasize about colonizing mars and decide what essentials we'd bring along on our trip
+* explore a series of lessons that build up your Clojure & ClojureScript skills gradually
+* the final lesson produces a simple API to store stuff securely using Clojure, Clojurescript, Leiningen, Docker, Crypto, and PostgreSQL deployed to Zeit or Heroku
+* geek out & fantasize about colonizing mars and decide what essentials we'd bring along on our trip
 
 ## Learning process
 
 If this repo is meant to teach, it needs to support incremental learning and break up the project into smaller projects which gradually introduce new libraries. The first example project has 6 libraries, and then each subsequent example will add no more than 4 libraries.
 
 ## Lessons
+
+![alt text](screenshot.png)
 
 * lesson 1 Clojure - map, filter, find, reduce - in-progress
 * lesson 2 Clojure PostgreSQL - in-progress
