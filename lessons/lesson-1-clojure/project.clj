@@ -1,6 +1,6 @@
 (defproject clojure-getting-started "1.0.0-SNAPSHOT"
   :description "a simple secure store"
-  :url "http://clojure-getting-started.herokuapp.com"
+  :url "https://glacial-badlands-20785.herokuapp.com"
   :license {:name "Eclipse Public License v1.0"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]

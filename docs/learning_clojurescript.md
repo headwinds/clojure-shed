@@ -12,7 +12,7 @@ Let's start a new project and build this [quick start figwheel](https://github.c
 
 ## Reagent & Re-frame
 
-You have built several React & Redux projects and now wish to learn the equivalent in Clojurescript which is [Reagent](https://reagent-project.github.io/) & [Re-frame](https://github.com/Day8/re-frame).  
+We've built several React & Redux projects and now wish to learn the equivalent in Clojurescript which is [Reagent](https://reagent-project.github.io/) & [Re-frame](https://github.com/Day8/re-frame).  
 
 We will leverage the [luminus framework](http://www.luminusweb.net/) which is included in the latest version of leiningen
 
@@ -22,7 +22,7 @@ $ cd shed
 $ lein run
 ```
 
-You should see this screen in your browser:
+We should see this screen in your browser:
 
 Open the browser to http://localhost:3000
 

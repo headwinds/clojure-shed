@@ -43,7 +43,9 @@ heroku logs --tail
 ## tutorials
 [Clojure web apps: Zero to 'Hello World' on Heroku in Clojure in 15 minutes.](https://adambard.com/blog/Getting-started-with-Clojure-web-apps/)
 
-[4clojure](http://www.4clojure.com/)
+[{:4clojure problems}](http://www.4clojure.com/)
+
+[{:4clojure ansnwers}](https://github.com/qiuxiafei/4clojure/tree/master/answers)
 
 [Compojure Address Book Part 1](http://www.jarrodctaylor.com/posts/Compojure-Address-Book-Part-1/)
 
