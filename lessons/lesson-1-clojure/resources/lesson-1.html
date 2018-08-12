@@ -16,7 +16,7 @@
     The following is a collection of contrived examples that introduce some of fundamentals of Functional Programming.
   </p>
   <p>
-    For instance, in this experiment featuring some of the
+    They mainly feature Clojure services and the data is simply stored on the server without involving a database which will appear in the next lesson. By storing data on the server, we can protect and conceal records from the browser and expose them if and when it makes sense to do so. For instance, in this experiment featuring some of the
     <a href="https://www.businessinsider.com/lego-women-nasa-scientists-astronauts-kit-2017-10" target="_blank">women of NASA lego set</a>,
     we transform a list of scientists and update their agency.
   </p>
@@ -86,7 +86,7 @@
       <img src="/imgs/vehicle.jpg" width="200px" />
     </div>
     <div>
-      Let's build a crew map move the scientists onto two vechiles
+      Let's assemble two crews moving the scientists onto harvesters.
     </div>
     <div>
     <h2 class='home_sub'>Clojure</h2>
@@ -103,11 +103,11 @@
   </div>
   <div>
     <div>
-      <h2 class='home_sub'>Vehicle 1</h2>
+      <h2 class='home_sub'>Vehicle 1: Apollo</h2>
       <div id="fleet-1-results">???</div>
     </div>
     <div>
-      <h2 class='home_sub'>Vehicle 2</h2>
+      <h2 class='home_sub'>Vehicle 2: Dragon</h2>
       <div id="fleet-2-results">???</div>
     </div>
   </div>
@@ -123,14 +123,6 @@
     <div id="lego-box" style="display: flex; flex-direction: column; position: relative">
         <div>
           <img src="/imgs/rover.png" width="300px" />
-        </div>
-        <div id="rachael" style="display: none; flex-direction: row; position: relative">
-          <div>
-            <img src="/imgs/rachael.jpg" width="90px" />
-          </div>
-          <div style="margin-top: 70px">
-            <img src="/imgs/cockateil.jpg" width="70px" />
-          </div>
         </div>
     </div>
     <div>
@@ -149,6 +141,14 @@
      {:status 200
       :body found-scientist}))
     </xmp>
+  </div>
+  <div id="rachael" style="display: none; flex-direction: row; position: relative">
+    <div>
+      <img src="/imgs/rachael.jpg" width="90px" />
+    </div>
+    <div style="margin-top: 70px">
+      <img src="/imgs/cockateil.jpg" width="70px" />
+    </div>
   </div>
   <div id="find-results"></div>
     <div>

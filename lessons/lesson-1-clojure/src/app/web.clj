@@ -16,7 +16,7 @@
 ;; scientists is a vector of maps - I made up their ages
 (defonce scientists
   [ {:name "Sally Ride"        :profession "Astronaunt"         :agency "???"   :age 58 :specialty "Physics" :ship 2}
-    {:name "Mae Jemison"       :profession "Astronaunt"         :agency "???"   :age 35 :specialty "Physician" :ship 1}
+    {:name "Mae Jemison"       :profession "Astronaunt"         :agency "???"   :age 35 :specialty "Physician" :ship 2}
     {:name "Nancy Grace Roman" :profession "Astronomer"         :agency "???"   :age 32 :specialty "Hubble" :ship 1}
     {:name "Margaret Hamilton" :profession "Computer Scientist" :agency "???"   :age 29 :specialty "Systems Engineer" :ship 1}
     {:name "Rachel Binx"       :profession "Computer Scientist" :agency "???"   :age 23 :specialty "Data Visualization" :ship 2 }])
@@ -102,10 +102,11 @@
 
 (defn reduce-minerals []
   (let [minerals-with-totals
-          (reduce (fn [res mineral]
+          (reduce (fn [acc mineral]
                      (let [mineral-type (mineral :type)
+                           key (keyword mineral-type)
                            mineral-count (mineral :count)]
-                       (assoc res mineral-type (+ mineral-count (get res mineral-type 0)))))
+                       (assoc acc key (+ mineral-count (get acc key 0)))))
                    {}
                    minerals)]
   {:status 200

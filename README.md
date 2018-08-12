@@ -9,10 +9,10 @@ If this repo is meant to teach, it needs to support incremental learning and bre
 
 ## Lessons
 
-![alt text](screenshot.png)
+Complete 1/5
 
-* lesson 1 Clojure - map, filter, find, reduce - in-progress
-* lesson 2 Clojure PostgreSQL - in-progress
+* lesson 1 Clojure - map, filter, find, reduce - [view online](https://glacial-badlands-20785.herokuapp.com/)
+* lesson 2 Clojure PostgreSQL - to do
 * lesson 3 Clojure PostgreSQL ClojureScript  - to do
 * lesson 4 Clojure PostgreSQL ClojureScript Docker - to do
 * lesson 5 Clojure PostgreSQL ClojureScript Docker Crypto - to do
