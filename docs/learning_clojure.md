@@ -51,6 +51,8 @@ heroku logs --tail
 
 [Clojure Collections](https://purelyfunctional.tv/guide/clojure-collections)
 
+[Learn X in Y minutes where X = Clojure](https://learnxinyminutes.com/docs/clojure/)
+
 
 ## clojurians
 [beginners](https://clojurians-log.clojureverse.org/beginners/2017-11-01)

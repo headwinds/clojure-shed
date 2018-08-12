@@ -9,17 +9,7 @@ Learn how to make a few Clojure service calls and see how one can transform list
 * [ring](https://github.com/ring-clojure/ring/wiki)
 * [environ](https://yobriefca.se/blog/2014/04/29/managing-environment-variables-in-clojure/)
 
-Total 6
-
-see project.clj which lists:
-```
-:dependencies [[org.clojure/clojure "1.6.0"]
-               [compojure "1.4.0"]
-               [ring/ring-json "0.3.1"]
-               [ring/ring-jetty-adapter "1.4.0"]
-               [environ "1.0.0"]
-               [org.clojure/java.jdbc "0.6.1"]]
-```  
+see project.clj which lists them and their version numbers.
 
 ## Getting started
 

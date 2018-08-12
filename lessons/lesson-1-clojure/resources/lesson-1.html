@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>experiments</title>
    <link rel="stylesheet" type="text/css" href="/css/level-1-style.css">
 </head>
@@ -24,13 +25,11 @@
     <h2 class='home_sub'>Map</h2>
     <div id="lego-box">
       <img src="/imgs/civilians.jpg" width="300px" />
-      <img src="/imgs/rachael.jpg" width="90px" />
-      <img src="/imgs/cockateil.jpg" width="70px" />
     </div>
     <div>
       Let's show that these women have worked at NASA.
     </div>
-    <div id="map-results"></div>
+
     <div>
       <h2 class='home_sub'>Clojure</h2>
       <xmp>
@@ -44,6 +43,7 @@
    :body scientists-with-agency}))
       </xmp>
     </div>
+    <div id="map-results"></div>
     <div>
       <button id="btn" onclick="mapScientists()">map scientists</button>
     </div>
@@ -59,7 +59,6 @@
     <div>
       Who should we send to space?
     </div>
-    <div id="filter-results"></div>
     <div>
     <h2 class='home_sub'>Clojure</h2>
     <xmp>
@@ -72,38 +71,9 @@
       :body scientists-filtered-by-profession}))
     </xmp>
   </div>
+    <div id="filter-results"></div>
     <div>
       <button id="btn" onclick="filterScientists()">filter astronauts</button>
-    </div>
-  </div>
-
-  <hr />
-
-  <div>
-    <h2 class='home_sub'>Find</h2>
-    <div id="lego-box">
-      <img src="/imgs/rover.png" width="200px" />
-    </div>
-    <div>
-      Who should we assign to visualize Rover data?
-    </div>
-    <div id="find-results"></div>
-    <div>
-    <h2 class='home_sub'>Clojure</h2>
-    <xmp>
-(defn find-scientist
-  "returns the first scientist matching these profession and age arguments"
-     [profession specialty]
-     (let [found-scientist
-             (first (filter (every-pred (comp #{specialty} :specialty)
-                                        (comp #{profession} :profession))
-                                        scientists))]
-     {:status 200
-      :body found-scientist}))
-    </xmp>
-  </div>
-    <div>
-      <button id="btn" onclick="findScientist()">find computer scientist</button>
     </div>
   </div>
 
@@ -119,16 +89,6 @@
       Let's build a crew map move the scientists onto two vechiles
     </div>
     <div>
-      <div>
-        <h2 class='home_sub'>Vehicle 1</h2>
-        <div id="fleet-1-results">???</div>
-      </div>
-      <div>
-        <h2 class='home_sub'>Vehicle 2</h2>
-        <div id="fleet-2-results">???</div>
-      </div>
-    </div>
-    <div>
     <h2 class='home_sub'>Clojure</h2>
     <xmp>
   (defn filter-crew [staff ship-id] (filter #(= (:ship %) ship-id) staff))
@@ -141,11 +101,108 @@
      :body fleet})
     </xmp>
   </div>
+  <div>
+    <div>
+      <h2 class='home_sub'>Vehicle 1</h2>
+      <div id="fleet-1-results">???</div>
+    </div>
+    <div>
+      <h2 class='home_sub'>Vehicle 2</h2>
+      <div id="fleet-2-results">???</div>
+    </div>
+  </div>
     <div>
       <button id="btn" onclick="getFleet()">filter create crews</button>
     </div>
   </div>
 
+  <hr />
+
+  <div>
+    <h2 class='home_sub'>Find</h2>
+    <div id="lego-box" style="display: flex; flex-direction: column; position: relative">
+        <div>
+          <img src="/imgs/rover.png" width="300px" />
+        </div>
+        <div id="rachael" style="display: none; flex-direction: row; position: relative">
+          <div>
+            <img src="/imgs/rachael.jpg" width="90px" />
+          </div>
+          <div style="margin-top: 70px">
+            <img src="/imgs/cockateil.jpg" width="70px" />
+          </div>
+        </div>
+    </div>
+    <div>
+      Who should we assign to visualize Rover data?
+    </div>
+    <div>
+    <h2 class='home_sub'>Clojure</h2>
+    <xmp>
+(defn find-scientist
+  "returns the first scientist matching these profession and age arguments"
+     [profession specialty]
+     (let [found-scientist
+             (first (filter (every-pred (comp #{specialty} :specialty)
+                                        (comp #{profession} :profession))
+                                        scientists))]
+     {:status 200
+      :body found-scientist}))
+    </xmp>
+  </div>
+  <div id="find-results"></div>
+    <div>
+      <button id="btn" onclick="findScientist()">find a data viz expert</button>
+    </div>
+  </div>
+
+  <hr />
+
+  <div>
+    <h2 class='home_sub'>Reduce</h2>
+    <div>
+      They have returned from collecting samples. What is the total amount of each item?
+    </div>
+    <div>
+    <h2 class='home_sub'>Clojure</h2>
+    <xmp>
+(defn get-type [n]
+(cond
+   (>= n 95) "diamond"
+   (>= n 45) "trash"
+   (>= n 42) "plutonium"
+   (>= n 40) "gold"
+   (>= n 38) "emerald"
+   :else "rock"))
+
+(def create-minerals
+  (fn [n]
+    (loop [cnt n
+           acc []]
+       (if (zero? cnt)
+            acc
+          (recur (dec cnt) (conj acc {:name "mineral" :type (get-type cnt) :count 1}))
+))))
+
+(def minerals (create-minerals 100))
+
+(defn reduce-minerals []
+  (let [minerals-with-totals
+          (reduce (fn [res mineral]
+                     (let [mineral-type (mineral :type)
+                           mineral-count (mineral :count)]
+                       (assoc res mineral-type (+ mineral-count (get res mineral-type 0)))))
+                   {}
+                   minerals)]
+  {:status 200
+    :body minerals-with-totals}))
+    </xmp>
+  </div>
+    <div id="reduce-results"></div>
+    <div>
+      <button id="btn" onclick="reduceMinerals()">reduce minerals</button>
+    </div>
+  </div>
 
 </div>
   <script>
@@ -265,6 +322,7 @@
         console.log("find response: " , foundScientist);
         foundScientist["agency"] = "NASA";
         updateDomWithResults([foundScientist], "find-results")
+        document.getElementById("rachael").style.display = "flex"
       });
   }
 
@@ -287,13 +345,27 @@
 
   //- REDUCE ------------------------------
 
-  const reduceScientists = () => {
-    fetch('/reduce-scientists')
+  const updateDomWithReducedResults = (response, elId) => {
+    const mapResults = document.getElementById(elId);
+
+    let results = "<ul>";
+    results += `<li>gold: ${response.gold}</li>`;
+    results += `<li>plutonium: ${response.plutonium}</li>`;
+    results += `<li>emeralds: ${response.emerald}</li>`;
+    results += `<li>trash: ${response.trash}</li>`;
+    results += `<li>rocks: ${response.rock}</li>`;
+    results += "</ul>";
+
+    mapResults.innerHTML = results;
+  }
+
+  const reduceMinerals = () => {
+    fetch('/reduce-minerals')
       .then(function(response) {
         return response.json();
       })
-      .then(function(scientistsNotReadyYet) {
-        // coming soon
+      .then(function(reduceMinerals) {
+        updateDomWithReducedResults(reduceMinerals, 'reduce-results')
       });
   }
 

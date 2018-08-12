@@ -22,18 +22,18 @@ body {
 
 h1.home {
   font-family: 'Kelly Slab', cursive;
-  color: #9e9658;
-  font-size: 20px;
+  color: #0079e2;
+  font-size: 30px;
 }
 
 h2.home_sub {
   font-family: 'Kelly Slab', cursive;
-  color: #9e9658;
-  font-size: 16px;
+  color: #0079e2;
+  font-size: 20px;
 }
 
 a {
-  color: #9e9658;
+  color: #0079e2;
   text-decoration: none;
 }
 
@@ -59,7 +59,7 @@ button {
   border-radius: 4px;
   background: #eee;
   border: none;
-  background-color: #9e9658;
+  background-color: #0079e2;
   color: white;
   font-size: 14px;
   outline: 'none';

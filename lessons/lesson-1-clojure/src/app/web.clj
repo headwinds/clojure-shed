@@ -6,6 +6,7 @@
             [clojure.string :as str]
             [clojure.java.jdbc :as j]
             [clojure.java.io :as io]
+            [ring.util.response :refer [response resource-response]]
             [ring.adapter.jetty :as jetty]
             [ring.middleware.json :as middleware]
             [environ.core :refer [env]]))
@@ -22,15 +23,17 @@
 
 ;; -- HANDLERS -------------------------------------------------------------
 
+(def lego-scientists (rest (reverse scientists)));
+
 (defn get-scientists []
   {:status 200
-    :body scientists})
+    :body lego-scientists})
 
 ;; -- MAP --
 
 (defn map-scientists [agency-name]
   (map (fn [value] (assoc value :agency agency-name))
-    scientists)
+    lego-scientists)
   )
 
 (defn map-scientists-to-agency
@@ -52,8 +55,6 @@
 
 ;; -- FIND --
 
-;; https://stackoverflow.com/questions/30361492/idiomatic-way-to-select-a-map-in-vector-by-a-key
-;; https://stackoverflow.com/questions/42643091/how-to-filter-vector-of-maps-by-multiple-keys-in-clojure?rq=1
 (defn find-scientist
   "returns the first scientist matching these profession and age arguments"
      [profession specialty]
@@ -70,8 +71,6 @@
 
 (def nasa-scientists (map-scientists "NASA"))
 
-(println "nasa" nasa-scientists)
-
 (def fleet [{:ship "apollo" :crew (filter-crew nasa-scientists 1)}
             {:ship "dragon" :crew (filter-crew nasa-scientists 2)}])
 
@@ -81,36 +80,46 @@
 
 ;; -- REDUCE --
 
-(defn reduce-scientists []
-  (let [crew
-          (reduce
-            (fn [acc val]
-              ;; coming soon
-               acc
-            )
-        [] scientists)]
-  {:status 200
-    :body crew}))
+(defn get-type [n]
+(cond
+   (>= n 95) "diamond"
+   (>= n 45) "trash"
+   (>= n 42) "plutonium"
+   (>= n 40) "gold"
+   (>= n 38) "emerald"
+   :else "rock"))
 
-(defn splash []
+(def create-minerals
+  (fn [n]
+    (loop [cnt n
+           acc []]
+       (if (zero? cnt)
+            acc
+          (recur (dec cnt) (conj acc {:name "mineral" :type (get-type cnt) :count 1}))
+))))
+
+(def minerals (create-minerals 100))
+
+(defn reduce-minerals []
+  (let [minerals-with-totals
+          (reduce (fn [res mineral]
+                     (let [mineral-type (mineral :type)
+                           mineral-count (mineral :count)]
+                       (assoc res mineral-type (+ mineral-count (get res mineral-type 0)))))
+                   {}
+                   minerals)]
   {:status 200
-   :headers {"Content-Type" "text/plain"}
-   :body "Hello world"})
+    :body minerals-with-totals}))
 
 (defroutes app-routes
-  (GET "/" []
-        (route/not-found (slurp (io/resource "index.html"))))
+
   (route/resources "/")
-  (POST "/send-str" request
-    (let [name (or (get-in request [:params :name])
-                   (get-in request [:body :name])
-                   "John Doe")]
-      {:status 200
-       :body {:name name
-       :desc (str "The name you sent to me was " name)}}))
+
+  (GET "/" []
+    (resource-response "index.html"))
 
   (GET "/lesson-1" []
-        (route/not-found (slurp (io/resource "lesson-1.html"))))
+        (resource-response "lesson-1.html"))
 
   (POST "/map-scientists-to-agency" request
     (let [agency-name (or   (get-in request [:params :name])
@@ -132,14 +141,11 @@
   (GET "/get-scientists" []
        (get-scientists))
 
-  (GET "/test" []
-       (splash))
-
   (GET "/get-fleet" []
       (get-fleet))
 
-  (GET "/reduce-scientists" []
-        (reduce-scientists))
+  (GET "/reduce-minerals" []
+        (reduce-minerals))
 
   (ANY "*" []
        (route/not-found (slurp (io/resource "404.html")))))
