@@ -1,3 +1,5 @@
+;; rename to profiles.clj with your details and be careful to include profiles.clj in your .gitignore
+
 {:dev
   {:env
     { :production "false"
