@@ -11,3 +11,4 @@ pom.xml
 /.nrepl-port
 
 config.json
+profiles.clj
