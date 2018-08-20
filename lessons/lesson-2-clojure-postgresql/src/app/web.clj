@@ -18,13 +18,6 @@
             :sslmode (env :database-sslmode)
             })
 
-(def pg-heroku-uri
-  {:connection-uri (str "postgresql://postgres:your-password-here@localhost:5432/shed"
-                        "?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory")})
-
-(def pg-uri
-  {:connection-uri (str "postgresql://postgres:your-password-here@localhost:5432/shed")})
-
 (defn get-colonists
   []
   (j/query pg-db
