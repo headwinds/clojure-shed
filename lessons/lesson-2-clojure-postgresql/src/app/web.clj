@@ -5,15 +5,18 @@
             [clojure.java.jdbc :as j]
             [clojure.java.io :as io]
             [ring.adapter.jetty :as jetty]
+            [ring.util.response :refer [response resource-response]]
             [ring.middleware.json :as middleware]
             [environ.core :refer [env]]))
 
 (def pg-db {:dbtype "postgresql"
-            :dbname "shed"
-            :host "localhost"
+            :dbname (env :database-dbname)
+            :host (env :database-host)
             :port "5432"
-            :user "postgres"
-            :password "Bedford22"})
+            :user (env :database-user)
+            :password (env :database-password)
+            :sslmode (env :database-sslmode)
+            })
 
 (def pg-heroku-uri
   {:connection-uri (str "postgresql://postgres:your-password-here@localhost:5432/shed"
@@ -43,6 +46,10 @@
       {:status 200
        :body {:name name
        :desc (str "The name you sent to me was " name)}}))
+
+  (GET "/lesson-2" []
+       (resource-response "lesson-2.html"))
+
   (GET "/lego-blockchain" []
         (route/not-found (slurp (io/resource "lego-blockchain.html"))))
   (GET "/get-colonists" []

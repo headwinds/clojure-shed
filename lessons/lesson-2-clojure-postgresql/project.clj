@@ -7,12 +7,21 @@
                  [compojure "1.4.0"]
                  [ring/ring-json "0.3.1"]
                  [ring/ring-jetty-adapter "1.4.0"]
-                 [environ "1.0.0"]
+                 [environ "1.1.0"]
                  [org.clojure/java.jdbc "0.6.1"]
                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [hiccup "1.0.5"]]
   :min-lein-version "2.0.0"
-  :plugins [[environ/environ.lein "0.3.1"]]
-  :hooks [environ.leiningen.hooks]
+  :plugins [[lein-environ "1.1.0"]]
   :uberjar-name "clojure-getting-started-standalone.jar"
-  :profiles {:production {:env {:production true}}})
+  :profiles { :dev [:project/dev :profiles/dev]
+              :test [:project/test :profiles/test]
+              :production [:project/production :profiles/production]
+           ;; only edit :profiles/* in profiles.clj
+              :profiles/dev  {}
+              :profiles/test {}
+              :profiles/production {}
+              :project/dev {:source-paths ["src" "tool-src"]
+                         :dependencies [[midje "1.6.3"]]
+                         :plugins [[lein-auto "0.1.3"]]}
+              :project/test {}})
