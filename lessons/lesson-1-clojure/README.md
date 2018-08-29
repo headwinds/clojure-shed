@@ -39,6 +39,7 @@ git commit -m "first commit"
 heroku create
 git push heroku master
 heroku ps:scale web=1
+heroku open
 ```
 Then open your browser whatever url it created ie: https://glacial-badlands-20785.herokuapp.com/
 

@@ -15,7 +15,7 @@
       :database-dbname "d4iq187en6e304"
       :database-host "ec2-54-163-227-253.compute-1.amazonaws.com"
       :database-user ""
-      :database-password ""}
-      :database-sslmode "require"
+      :database-password ""
+      :database-sslmode "require"}
   }
 }
