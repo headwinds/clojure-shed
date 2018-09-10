@@ -32,7 +32,7 @@
 ;; -- MAP --
 
 (defn map-scientists [agency-name]
-  (map (fn [value] (assoc value :agency agency-name))
+  (map (fn [scientist] (assoc scientist :agency agency-name))
     lego-scientists)
   )
 
@@ -92,21 +92,21 @@
 (def create-minerals
   (fn [n]
     (loop [cnt n
-           acc []]
+           minerals []]
        (if (zero? cnt)
-            acc
-          (recur (dec cnt) (conj acc {:name "mineral" :type (get-type cnt) :count 1}))
+            minerals
+          (recur (dec cnt) (conj minerals {:name "mineral" :type (get-type cnt) :count 1}))
 ))))
 
 (def minerals (create-minerals 100))
 
 (defn reduce-minerals []
   (let [minerals-with-totals
-          (reduce (fn [acc mineral]
+          (reduce (fn [mineral-totals mineral]
                      (let [mineral-type (mineral :type)
                            key (keyword mineral-type)
                            mineral-count (mineral :count)]
-                       (assoc acc key (+ mineral-count (get acc key 0)))))
+                       (assoc mineral-totals key (+ mineral-count (get mineral-totals key 0)))))
                    {}
                    minerals)]
   {:status 200
