@@ -112,7 +112,7 @@ goog.addDependency("../example/demos/demo_soloist.js", ['example.demos.demo_solo
 goog.addDependency("../example/demos/demo_hard_support.js", ['example.demos.demo_hard_support'], ['material_ui', 'reagent.core', 'cljs.core', 'material_ui_icons']);
 goog.addDependency("../example/utils/js.js", ['example.utils.js'], ['cljs.core']);
 goog.addDependency("../example/db.js", ['example.db'], ['cljs.core']);
-goog.addDependency("../example/events.js", ['example.events'], ['reagent.core', 'cljs.core', 'example.utils.js', 'goog.object', 'reagent.impl.template', 'example.db', 're_frame.core', 'example.utils.http_fx']);
+goog.addDependency("../example/events.js", ['example.events'], ['ajax.core', 'reagent.core', 'cljs.core', 'example.utils.js', 'goog.object', 'reagent.impl.template', 'example.db', 're_frame.core', 'example.utils.http_fx']);
 goog.addDependency("../example/components/survey.js", ['example.components.survey'], ['material_ui', 'reagent.core', 'cljs.core', 'material_ui_icons', 'example.events', 'reagent.impl.template', 'example.utils.http_fx']);
 goog.addDependency("../example/demos/demo_hard_carry.js", ['example.demos.demo_hard_carry'], ['material_ui', 'reagent.core', 'cljs.core', 'material_ui_icons', 'example.components.survey']);
 goog.addDependency("../example/demos/demo_roaming_support.js", ['example.demos.demo_roaming_support'], ['material_ui', 'reagent.core', 'cljs.core', 'material_ui_icons']);

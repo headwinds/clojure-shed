@@ -3,6 +3,7 @@
             [re-frame.core :as re]
             [example.utils.http-fx :refer  [GET POST PUT <sub >evt set-location]]
             [goog.object :as gobj]
+            [ajax.core :as ajax]
             [example.db :as db]
             [example.utils.js :refer [log]]
             [reagent.impl.template :as rtpl]))
@@ -43,17 +44,20 @@
                  :sidequest-bonus sidequest-bonus}]
 
    {:http-xhrio (POST "/api/logs/add"
-                      {:data payload}
+                      payload
+                      :format          (ajax/json-request-format)
+                      :response-format (ajax/json-response-format {:keywords? true})
                       :post-add-log-success
                       :post-add-log-fail)})))
 
 (re/reg-event-db :post-add-log-success
-(fn [db [_ response]]
-  (let [success-notification { :message "Log added!"
-                               :type "success"
-                               :show true}]
-  ;;(re/dispatch [:notification success-notification])
-  (log "post-add-log-success" response))))
+  (fn [db [_ response]]
+      (let [success-notification { :message "Log added!"
+                                   :type "success"
+                                   :show true}]
+      ;;(re/dispatch [:notification success-notification])
+      (log "post-add-log-success" response))
+      db)) ;; always return the db!
 
 (re/reg-event-db :post-add-log-fail
 (fn [db [_ response]]
@@ -61,7 +65,8 @@
                             :type "error"
                             :show true}]
   ;;(re/dispatch [:notification fail-notification])
-  (log "post-add-log-fail" response))))
+  (log "post-add-log-fail" response))
+  db))
 
 ;; Get Logs
 

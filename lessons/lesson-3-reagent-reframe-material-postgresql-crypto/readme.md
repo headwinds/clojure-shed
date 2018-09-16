@@ -68,6 +68,10 @@ Then open your browser whatever url it created ie: https://glacial-badlands-2078
 
 ## Dev Credit
 
+* [clojure & postgres recipe](https://github.com/clojure-cookbook/clojure-cookbook/blob/master/06_databases/6-03_manipulating-an-SQL-database.asciidoc)
+* [json to clojure and vice versa](https://stackoverflow.com/questions/3436216/how-to-map-clojure-code-to-and-from-json)
+* [compojure creating responses](https://github.com/ring-clojure/ring/wiki/Creating-responses)
+* [compojure & ring](https://github.com/magomimmo/modern-cljs/blob/master/doc/first-edition/tutorial-03.md)
 * [using a ring handler with figwheel](https://github.com/bhauman/lein-figwheel/tree/master/examples/using-ring-handler)
 * [lock-key](https://github.com/clavoie/lock-key)
 * [buddy](https://github.com/funcool/buddy)

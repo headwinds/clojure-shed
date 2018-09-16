@@ -8,6 +8,7 @@
                  [secretary "1.2.3"]
                  [cljs-ajax "0.7.3"]
                  [figwheel "0.5.16"]
+                 [cheshire "5.8.0"]
                  [cljsjs/material-ui "1.2.1-1"]
                  [cljsjs/material-ui-icons "1.1.0-1"]
                  [compojure "1.6.0"]
@@ -15,13 +16,16 @@
                  [ring/ring-ssl "0.3.0"]
                  [ring/ring-json "0.3.1"]
                  [lock-key "1.5.0"]
+                 [buddy/buddy-core "1.4.0"]
                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [environ "1.1.0"]]
 
   :plugins [[lein-environ "1.1.0"]
             [lein-cljsbuild "1.1.7"]
+            [lein-ring "0.12.4"]
             [lein-figwheel "0.5.16"]]
   :uberjar-name "example.jar"
+  :ring {:handler example.web/handler}
   :figwheel {:repl false
              :http-server-root "public"
              :ring-handler example.web/-main

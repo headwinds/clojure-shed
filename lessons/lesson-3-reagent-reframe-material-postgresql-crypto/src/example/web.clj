@@ -1,17 +1,19 @@
 (ns example.web
   (:require [compojure.core :refer [defroutes GET PUT POST DELETE ANY]]
-            [compojure.handler :refer [site]]
+            [compojure.handler :as handler :refer [site]]
             [compojure.route :as route]
             [clojure.java.io :as io]
             [lock-key.core :refer [decrypt-from-base64 encrypt-as-base64]]
+            [buddy.core.hash :as hash]
+            [buddy.core.codecs :refer :all]
             [clojure.java.jdbc :as j]
             [ring.adapter.jetty :as jetty]
             [example.heroku-config :as heroku-config]
             [ring.util.response :refer [response resource-response]]
             [ring.middleware.ssl :as ssl]
-            [ring.middleware.json :as middleware]
+            [ring.middleware.json :as json :refer [wrap-json-body]]
+            [cheshire.core :as cheshire]
             [environ.core :refer [env]]))
-
 
 ;;-- State
 
@@ -40,10 +42,9 @@
 
 ;;-- Handlers
 
-(defn handler [request]
-  {:status 200
-   :headers {"Content-Type" "text/html"}
-   :body "Hello World"})
+(defn hash-username [username]
+  (-> (hash/md5 username)
+    (bytes->hex)))
 
 (defn encrypt
   "Encrypt a message with the given key."
@@ -55,19 +56,42 @@
   [ciphertext]
   (decrypt-from-base64 ciphertext secret-key))
 
+  ;;get-raw-key
+
+(def username-hash-sample "b7f787b6fd62dbf0b97947310a2f786ad4e1f24fd19d8d7f6983d86802dbee23ff8e6b5114c19c633b67b2c239ecfaea97740678f0991ce1bc7d2e3870f7ac41")
+
+
+;;-- username needs to be is a 128 hash
 (defn save-log [username goal major-bonus minor-bonus sidequest-bonus]
-  (let [username-ciphertext (encrypt username)
+  (let [username-hash (hash-username username)
         goal-ciphertext (encrypt goal)
         major-bonus-ciphertext (encrypt  major-bonus)
         minor-bonus-ciphertext (encrypt minor-bonus)
         sidequest-bonus-ciphertext (encrypt sidequest-bonus)
-        query (str "INSERT INTO log (username, goal, major_bonus, minor_bonus, sidequest_bonus ) VALUES ("
-                  username-ciphertext ","
-                  goal-ciphertext ","
-                  major-bonus-ciphertext ","
-                  minor-bonus-ciphertext ","
-                  sidequest-bonus-ciphertext ")")]
-        (j/query pg-db
+        row {:username username-hash
+             :goal goal-ciphertext
+             :major_bonus major-bonus-ciphertext
+             :minor_bonus minor-bonus-ciphertext
+             :sidequest_bonus sidequest-bonus-ciphertext }]
+             (prn row)
+        (j/insert! pg-db :log row)))
+
+;;-- username needs to be is a 128 hash
+(defn save-logss [username goal major-bonus minor-bonus sidequest-bonus]
+  (let [username-128-hash (hash-username username)
+        goal-ciphertext (encrypt goal)
+        major-bonus-ciphertext (encrypt  major-bonus)
+        minor-bonus-ciphertext (encrypt minor-bonus)
+        sidequest-bonus-ciphertext (encrypt sidequest-bonus)
+        query (str "INSERT INTO log (username, goal, major_bonus, minor_bonus, sidequest_bonus ) VALUES ('"
+                  username-128-hash "','"
+                  goal-ciphertext "','"
+                  major-bonus-ciphertext "','"
+                  minor-bonus-ciphertext "','"
+                  sidequest-bonus-ciphertext "');")
+      _ (prn "enc query: " query)]
+
+        (j/insert! pg-db
           [query])))
 
 (defn get-logs
@@ -86,26 +110,39 @@
 
   (GET "/h" [] "Hello World there!")
 
+  (POST "/api/logs/addd" {:keys [params]}
+  (let [{:keys [username]} params]
+    (prn "username" username)))
+
+    ;;(let [s (with-out-str (pprint/pprint (conj request {:body (slurp (:body request))})))]
+   ;;{:status 200
+    ;;:header {"Content-Type" "text/plain"}
+    ;;:body   s}))
+
   (POST "/api/logs/add" request
-    (let [username (get-in request [:body :username])
-          goal (get-in request [:body :goal])
-          major-bonus (get-in request [:body :major-bonus])
-          minor-bonus (get-in request [:body :minor-bonus])
-          sidequest-bonus (get-in request [:body :sidequest-bonus])]
-       (save-log user goal major-bonus minor-bonus sidequest-bonus)))
+    (prn "body " (get-in request [:body]))
+    (let [data (get-in request [:body])
+          username (get data :username)
+          goal (get data :goal)
+          major-bonus (get data :major-bonus)
+          minor-bonus (get data :minor-bonus)
+          sidequest-bonus (get data :sidequest-bonus)]
+       (save-log username goal major-bonus minor-bonus sidequest-bonus)))
 
   (GET "/api/logs/get" []
     (get-logs))
-
-  (GET "/api/logs/test" [request] (handler request))
 
   (ANY "*" []
     (route/not-found "<h1>404 Not found</h1>")))
 
 (def app
      (-> (site app-routes)
-       (middleware/wrap-json-body {:keywords? true})
-       middleware/wrap-json-response))
+         (wrap-json-body {:keywords? true :bigdecimals? true})))
+
+
+(def handler
+  (-> (site app-routes)
+      (wrap-json-body {:keywords? true :bigdecimals? true})))
 
 (defn -main [& [port]]
   (let [port (Integer. (or port (env :port) 5000))]

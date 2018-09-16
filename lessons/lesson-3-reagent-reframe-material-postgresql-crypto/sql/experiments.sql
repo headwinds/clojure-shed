@@ -1,10 +1,10 @@
 CREATE TABLE log (
   log_id serial primary key,
-  username char(128) UNIQUE NOT NULL,
-  goal varchar(255) UNIQUE NOT NULL,
-  major_bonus varchar(255) UNIQUE NOT NULL,
-  minor_bonus varchar(255) UNIQUE NOT NULL,
-  sidequest_bonus varchar(255) UNIQUE NOT NULL,
+  username char(128) NOT NULL,
+  goal varchar(255) NOT NULL,
+  major_bonus varchar(255) NOT NULL,
+  minor_bonus varchar(255) NOT NULL,
+  sidequest_bonus varchar(255) NOT NULL,
   timestamp timestamp default current_timestamp);
 
 -- Create a log
