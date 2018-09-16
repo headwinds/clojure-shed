@@ -1,5 +1,9 @@
 # Lesson 3
 
+Unlike major sports, eSports is still a phenomenon on the fringe. Unless you play the games, you probably aren't aware of the live tournaments, the millions in prize money, and the players who dedicate their lives to the game.
+
+In this lesson, we will work with this cryptography library, [lock-key](https://github.com/clavoie/lock-key), which basically relies on the [Java implementation](https://stackoverflow.com/questions/10221257/is-there-an-aes-library-for-clojure) of AES, to encrypt Dota 2 tactics which only team mates can decrypt.  
+
 * [Reagent](https://github.com/reagent-project/reagent)
 * [Re-frame](https://github.com/Day8/re-frame)
 * [Material UI](https://material-ui.com/)
@@ -13,6 +17,8 @@
 ```
 lein figwheel
 ```
+
+In dev, there is a big API problem between communication between figwheel and the ring server. We need to figure out [figwheel can start the ring server](https://github.com/bhauman/lein-figwheel/tree/master/examples/using-ring-handler) which seems straight forward.
 
 ## Demo
 
@@ -63,6 +69,10 @@ Then open your browser whatever url it created ie: https://glacial-badlands-2078
 ## Dev Credit
 
 * [using a ring handler with figwheel](https://github.com/bhauman/lein-figwheel/tree/master/examples/using-ring-handler)
+* [lock-key](https://github.com/clavoie/lock-key)
+* [buddy](https://github.com/funcool/buddy)
+* [caesium](https://github.com/lvh/caesium)
+* [Exploring Java AES encryption algorithm with Clojure](http://jyliao.blogspot.com/2010/08/exploring-java-aes-encryption-algorithm.html)
 
 ## Dota2 Credit
 

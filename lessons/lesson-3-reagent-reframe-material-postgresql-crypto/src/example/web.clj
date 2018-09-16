@@ -3,9 +3,10 @@
             [compojure.handler :refer [site]]
             [compojure.route :as route]
             [clojure.java.io :as io]
-            ;;[caesium.crypto.secretbox :as sb]
+            [lock-key.core :refer [decrypt-from-base64 encrypt-as-base64]]
             [clojure.java.jdbc :as j]
             [ring.adapter.jetty :as jetty]
+            [example.heroku-config :as heroku-config]
             [ring.util.response :refer [response resource-response]]
             [ring.middleware.ssl :as ssl]
             [ring.middleware.json :as middleware]
@@ -15,14 +16,17 @@
 ;;-- State
 
 ;; heroku is not picking up my env uberjar setting but when I hardcode it works!
+;; so this is a bandaid until we sort out that issue
+(def valid-env (if (nil? (env :database-password)) heroku-config/en env))
+
 (def pg-db {:dbtype "postgresql"
-            :dbname (env :database-dbname)
-            :host (env :database-host)
+            :dbname (get valid-env :database-dbname)
+            :host (get valid-env :database-host)
             :port "5432"
-            :user (env :database-user)
-            :password (env :database-password)
-            :sslmode (env :database-sslmode)
-            :sslfactory (env :database-sslfactory)
+            :user (get valid-env :database-user)
+            :password (get valid-env :database-password)
+            :sslmode (get valid-env :database-sslmode)
+            :sslfactory (get valid-env :database-sslfactory)
             })
 
 ;; obvious warning do not publish your secret key but I am doing so for demo purposes
@@ -42,18 +46,14 @@
    :body "Hello World"})
 
 (defn encrypt
-  "Encrypt a message with the given key. The message can be in any form that can be converted into a byte-array."
-  [plaintext secret-key]
-  (-> plaintext
-    #_sb/to-byte-array
-    #_(sb/secretbox-nmr secret-key)))
+  "Encrypt a message with the given key."
+  [plaintext]
+  (encrypt-as-base64 plaintext secret-key))
 
 (defn decrypt
-  "Decrypt a message with the given key. The ciphertext can be in any form that can be converted into a byte-array."
-  [ciphertext k]
-  (-> ciphertext
-    #_sb/to-byte-array
-    #_(sb/open secret-key)))
+  "Decrypt a message with the given key."
+  [ciphertext]
+  (decrypt-from-base64 ciphertext secret-key))
 
 (defn save-log [username goal major-bonus minor-bonus sidequest-bonus]
   (let [username-ciphertext (encrypt username)
@@ -86,13 +86,13 @@
 
   (GET "/h" [] "Hello World there!")
 
-  ;;(POST "/api/logs/add" request
-    ;;(let [username (get-in request [:body :username])
-        ;;  goal (get-in request [:body :goal])
-        ;;  major-bonus (get-in request [:body :major-bonus])
-        ;;  minor-bonus (get-in request [:body :minor-bonus])
-        ;;  sidequest-bonus (get-in request [:body :sidequest-bonus])]
-       ;;(save-log user goal major-bonus minor-bonus sidequest-bonus)))
+  (POST "/api/logs/add" request
+    (let [username (get-in request [:body :username])
+          goal (get-in request [:body :goal])
+          major-bonus (get-in request [:body :major-bonus])
+          minor-bonus (get-in request [:body :minor-bonus])
+          sidequest-bonus (get-in request [:body :sidequest-bonus])]
+       (save-log user goal major-bonus minor-bonus sidequest-bonus)))
 
   (GET "/api/logs/get" []
     (get-logs))

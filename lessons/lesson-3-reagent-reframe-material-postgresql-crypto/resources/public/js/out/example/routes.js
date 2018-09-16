@@ -17,127 +17,127 @@ goog.require('example.demos.demo_soloist');
 goog.require('example.demos.demo_roaming_support');
 goog.require('example.demos.demo_hard_support');
 example.routes.hook_browser_navigation_BANG_ = (function example$routes$hook_browser_navigation_BANG_(){
-var G__27191 = (new goog.History());
-goog.events.listen(G__27191,goog.history.EventType.NAVIGATE,((function (G__27191){
+var G__26857 = (new goog.History());
+goog.events.listen(G__26857,goog.history.EventType.NAVIGATE,((function (G__26857){
 return (function (event){
 return secretary.core.dispatch_BANG_.call(null,event.token);
-});})(G__27191))
+});})(G__26857))
 );
 
-G__27191.setEnabled(true);
+G__26857.setEnabled(true);
 
-return G__27191;
+return G__26857;
 });
 example.routes.app_routes = (function example$routes$app_routes(){
 secretary.core.set_config_BANG_.call(null,new cljs.core.Keyword(null,"prefix","prefix",-265908465),"#");
 
-var action__26947__auto___27222 = (function (params__26948__auto__){
-if(cljs.core.map_QMARK_.call(null,params__26948__auto__)){
-var map__27192 = params__26948__auto__;
-var map__27192__$1 = ((((!((map__27192 == null)))?(((((map__27192.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__27192.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__27192):map__27192);
+var action__26845__auto___26888 = (function (params__26846__auto__){
+if(cljs.core.map_QMARK_.call(null,params__26846__auto__)){
+var map__26858 = params__26846__auto__;
+var map__26858__$1 = ((((!((map__26858 == null)))?(((((map__26858.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__26858.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__26858):map__26858);
 return re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("example.events","set-active-demo","example.events/set-active-demo",-1754613640),"splash"], null));
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__26948__auto__)){
-var vec__27194 = params__26948__auto__;
+if(cljs.core.vector_QMARK_.call(null,params__26846__auto__)){
+var vec__26860 = params__26846__auto__;
 return re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("example.events","set-active-demo","example.events/set-active-demo",-1754613640),"splash"], null));
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/",action__26947__auto___27222);
+secretary.core.add_route_BANG_.call(null,"/",action__26845__auto___26888);
 
 
-var action__26947__auto___27223 = (function (params__26948__auto__){
-if(cljs.core.map_QMARK_.call(null,params__26948__auto__)){
-var map__27197 = params__26948__auto__;
-var map__27197__$1 = ((((!((map__27197 == null)))?(((((map__27197.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__27197.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__27197):map__27197);
+var action__26845__auto___26889 = (function (params__26846__auto__){
+if(cljs.core.map_QMARK_.call(null,params__26846__auto__)){
+var map__26863 = params__26846__auto__;
+var map__26863__$1 = ((((!((map__26863 == null)))?(((((map__26863.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__26863.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__26863):map__26863);
 return re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("example.events","set-active-demo","example.events/set-active-demo",-1754613640),"hard-carry"], null));
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__26948__auto__)){
-var vec__27199 = params__26948__auto__;
+if(cljs.core.vector_QMARK_.call(null,params__26846__auto__)){
+var vec__26865 = params__26846__auto__;
 return re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("example.events","set-active-demo","example.events/set-active-demo",-1754613640),"hard-carry"], null));
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/heros/roles/hard-carry",action__26947__auto___27223);
+secretary.core.add_route_BANG_.call(null,"/heros/roles/hard-carry",action__26845__auto___26889);
 
 
-var action__26947__auto___27224 = (function (params__26948__auto__){
-if(cljs.core.map_QMARK_.call(null,params__26948__auto__)){
-var map__27202 = params__26948__auto__;
-var map__27202__$1 = ((((!((map__27202 == null)))?(((((map__27202.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__27202.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__27202):map__27202);
+var action__26845__auto___26890 = (function (params__26846__auto__){
+if(cljs.core.map_QMARK_.call(null,params__26846__auto__)){
+var map__26868 = params__26846__auto__;
+var map__26868__$1 = ((((!((map__26868 == null)))?(((((map__26868.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__26868.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__26868):map__26868);
 return re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("example.events","set-active-demo","example.events/set-active-demo",-1754613640),"semi-carry"], null));
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__26948__auto__)){
-var vec__27204 = params__26948__auto__;
+if(cljs.core.vector_QMARK_.call(null,params__26846__auto__)){
+var vec__26870 = params__26846__auto__;
 return re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("example.events","set-active-demo","example.events/set-active-demo",-1754613640),"semi-carry"], null));
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/heros/roles/semi-carry",action__26947__auto___27224);
+secretary.core.add_route_BANG_.call(null,"/heros/roles/semi-carry",action__26845__auto___26890);
 
 
-var action__26947__auto___27225 = (function (params__26948__auto__){
-if(cljs.core.map_QMARK_.call(null,params__26948__auto__)){
-var map__27207 = params__26948__auto__;
-var map__27207__$1 = ((((!((map__27207 == null)))?(((((map__27207.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__27207.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__27207):map__27207);
+var action__26845__auto___26891 = (function (params__26846__auto__){
+if(cljs.core.map_QMARK_.call(null,params__26846__auto__)){
+var map__26873 = params__26846__auto__;
+var map__26873__$1 = ((((!((map__26873 == null)))?(((((map__26873.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__26873.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__26873):map__26873);
 return re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("example.events","set-active-demo","example.events/set-active-demo",-1754613640),"soloist"], null));
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__26948__auto__)){
-var vec__27209 = params__26948__auto__;
+if(cljs.core.vector_QMARK_.call(null,params__26846__auto__)){
+var vec__26875 = params__26846__auto__;
 return re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("example.events","set-active-demo","example.events/set-active-demo",-1754613640),"soloist"], null));
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/heros/roles/soloist",action__26947__auto___27225);
+secretary.core.add_route_BANG_.call(null,"/heros/roles/soloist",action__26845__auto___26891);
 
 
-var action__26947__auto___27226 = (function (params__26948__auto__){
-if(cljs.core.map_QMARK_.call(null,params__26948__auto__)){
-var map__27212 = params__26948__auto__;
-var map__27212__$1 = ((((!((map__27212 == null)))?(((((map__27212.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__27212.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__27212):map__27212);
+var action__26845__auto___26892 = (function (params__26846__auto__){
+if(cljs.core.map_QMARK_.call(null,params__26846__auto__)){
+var map__26878 = params__26846__auto__;
+var map__26878__$1 = ((((!((map__26878 == null)))?(((((map__26878.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__26878.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__26878):map__26878);
 return re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("example.events","set-active-demo","example.events/set-active-demo",-1754613640),"roaming-support"], null));
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__26948__auto__)){
-var vec__27214 = params__26948__auto__;
+if(cljs.core.vector_QMARK_.call(null,params__26846__auto__)){
+var vec__26880 = params__26846__auto__;
 return re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("example.events","set-active-demo","example.events/set-active-demo",-1754613640),"roaming-support"], null));
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/heros/roles/roaming-support",action__26947__auto___27226);
+secretary.core.add_route_BANG_.call(null,"/heros/roles/roaming-support",action__26845__auto___26892);
 
 
-var action__26947__auto___27227 = (function (params__26948__auto__){
-if(cljs.core.map_QMARK_.call(null,params__26948__auto__)){
-var map__27217 = params__26948__auto__;
-var map__27217__$1 = ((((!((map__27217 == null)))?(((((map__27217.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__27217.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__27217):map__27217);
+var action__26845__auto___26893 = (function (params__26846__auto__){
+if(cljs.core.map_QMARK_.call(null,params__26846__auto__)){
+var map__26883 = params__26846__auto__;
+var map__26883__$1 = ((((!((map__26883 == null)))?(((((map__26883.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__26883.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__26883):map__26883);
 return re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("example.events","set-active-demo","example.events/set-active-demo",-1754613640),"hard-support"], null));
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__26948__auto__)){
-var vec__27219 = params__26948__auto__;
+if(cljs.core.vector_QMARK_.call(null,params__26846__auto__)){
+var vec__26885 = params__26846__auto__;
 return re_frame.core.dispatch.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword("example.events","set-active-demo","example.events/set-active-demo",-1754613640),"hard-support"], null));
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/heros/roles/hard-support",action__26947__auto___27227);
+secretary.core.add_route_BANG_.call(null,"/heros/roles/hard-support",action__26845__auto___26893);
 
 
 return example.routes.hook_browser_navigation_BANG_.call(null);
 });
 example.routes.get_main_demo = (function example$routes$get_main_demo(demo_name){
-var G__27228 = demo_name;
-switch (G__27228) {
+var G__26894 = demo_name;
+switch (G__26894) {
 case "splash":
 return example.demos.demo_dota2_splash.view;
 
@@ -168,4 +168,4 @@ return example.demos.demo_dota2_splash.view;
 }
 });
 
-//# sourceMappingURL=routes.js.map?rel=1536537359424
+//# sourceMappingURL=routes.js.map?rel=1537105875653

@@ -1,6 +1,10 @@
+# Lesson 2 Clojure & PostgreSQL
 
+In a future of driverless vehicles, the concept of a pilot is certainly shifting from someone who operates to someone who guides.
 
-# dependencies
+In this lesson, we'll look at how Clojure talks to PostgreSQL, and create a database of pilots who maintain their ships more than actually drive them.
+
+## dependencies
 
 * [clojure](https://blog.venanti.us/why-clojure/)
 * [compojure](https://github.com/weavejester/compojure/wiki)

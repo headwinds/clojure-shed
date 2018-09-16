@@ -19,7 +19,7 @@
                      }}
       [:h2 "Hard Carry"]
       [:div
-        [:p "stuff..."]]
+        [:p ""]]
       [survey/view classes]
     ]
     ))))

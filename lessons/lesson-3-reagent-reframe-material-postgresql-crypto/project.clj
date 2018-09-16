@@ -14,7 +14,7 @@
                  [ring/ring-jetty-adapter "1.6.2"]
                  [ring/ring-ssl "0.3.0"]
                  [ring/ring-json "0.3.1"]
-                 ;;[caesium "0.10.0"]
+                 [lock-key "1.5.0"]
                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [environ "1.1.0"]]
 

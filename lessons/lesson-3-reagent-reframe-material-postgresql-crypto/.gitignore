@@ -12,3 +12,4 @@ pom.xml
 
 config.json
 profiles.clj
+src/example/heroku_config.clj
