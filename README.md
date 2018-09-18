@@ -1,21 +1,15 @@
 # clojure-shed
 * explore a series of lessons that build up your Clojure & ClojureScript skills gradually
-* the final lesson produces a simple API to store stuff securely using Clojure, Clojurescript, Leiningen, Docker, Crypto, and PostgreSQL deployed to Zeit or Heroku
+* the final lesson produces a simple API to store stuff securely using Clojure, Clojurescript, Leiningen, Crypto, and PostgreSQL deployed to Heroku
 * geek out & fantasize about colonizing mars and decide what essentials we'd bring along on our trip
-
-## Learning process
-
-If this repo is meant to teach, it needs to support incremental learning and break up the project into smaller projects which gradually introduce new libraries. The first example project has 6 libraries, and then each subsequent example will add no more than 4 libraries.
 
 ## Lessons
 
-Complete 1/5
+Complete 1/3
 
 * lesson 1 Clojure - map, filter, find, reduce - [view online](https://glacial-badlands-20785.herokuapp.com/)
-* lesson 2 Clojure PostgreSQL - to do
-* lesson 3 Clojure PostgreSQL ClojureScript  - to do
-* lesson 4 Clojure PostgreSQL ClojureScript Docker - to do
-* lesson 5 Clojure PostgreSQL ClojureScript Docker Crypto - to do
+* lesson 2 Clojure PostgreSQL - 75% complete
+* lesson 3 Clojure (with Crypto) PostgreSQL ClojureScript (with Reagent & Reframe) - 75% complete
 
 ## Requirements
 
@@ -28,37 +22,9 @@ If you are on a Mac, it's best to install each with [brew](https://brew.sh/)
 - review my guide to [learning Clojure](https://github.com/headwinds/clojure-shed/tree/master/docs/learning_clojure.md)
 - review my guide to [learning Clojurescript](https://github.com/headwinds/clojure-shed/tree/master/docs/learning_clojurescript.md)
 
-## Getting Started
+## Deployment
 
-*coming soon*
-
-Goal: this project should be easy to build
-complete: nope
-
-```
-docker-compose up
-```
-
-
-## Deploy with Docker
-
-*coming soon*
-
-Edit the docker file to ensure that it builds the uberjar
-
-```
-lein uberjar
-```
-
-#### Zeit - hopefully coming soon - skip to Heroku
-
-```
-$ now
-```
-
-I need help here - I've deployed a Python API to Zeit via docker and it should - in theory - be a similar process.
-
-If you have any advice, let's discuss it in this [Zeit docker issue](https://github.com/headwinds/clojure-shed/issues) thread.
+Each lesson has its own readme.md on how to deploy to Heroku
 
 #### Heroku
 
