@@ -8,7 +8,9 @@
                  [secretary "1.2.3"]
                  [cljs-ajax "0.7.3"]
                  [figwheel "0.5.16"]
-                 [cheshire "5.8.0"]
+                 [cheshire "5.8.0"] ;; https://bauerspace.com/library-cheshire/
+                 [clj-http "3.9.1"] ;; https://github.com/dakrone/clj-http
+                 [cljs-http "0.1.39"]
                  [cljsjs/material-ui "1.2.1-1"]
                  [cljsjs/material-ui-icons "1.1.0-1"]
                  [compojure "1.6.0"]

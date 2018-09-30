@@ -9,4 +9,4 @@ re_frame.core.reg_sub.call(null,new cljs.core.Keyword(null,"strava-activities","
 return cljs.core.get_in.call(null,db,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"strava","strava",-1535308747),new cljs.core.Keyword(null,"activities","activities",1654844313)], null));
 }));
 
-//# sourceMappingURL=subs.js.map?rel=1538257640515
+//# sourceMappingURL=subs.js.map?rel=1538314349871

@@ -8,9 +8,10 @@
             [buddy.core.codecs :refer :all]
             [clojure.java.jdbc :as j]
             [ajax.core :as ajax]
+            [clj-http.client :as client]
             [ring.adapter.jetty :as jetty]
             [example.heroku-config :as heroku-config]
-            [ring.util.response :refer [response resource-response]]
+            [ring.util.response :refer [response resource-response redirect]]
             [ring.middleware.ssl :as ssl]
             [ring.middleware.json :as json :refer [wrap-json-body]]
             [ring.middleware.cors :refer [wrap-cors]]
@@ -40,7 +41,6 @@
 ;; its even dangerous to store the secret key in the env file
 (def secret-key
   (env :secret-key))
-
 
 (def public-strava-token
     (valid-env :strava-public-token))
@@ -88,13 +88,9 @@
        "approval_prompt=" approval-prompt "&"
        "scope=" scope))
 
-(defn handle-strava-auth [strava-response]
-  (prn "handle-strava-auth: " strava-response))
 
-(defn authorize-strava []
-  (ajax/GET strava-authorize-url {:handler handle-strava-auth}))
-
-(def code "bd12d017f3674ad65f5ea9712cf9c29d5b807112")
+;;-- should save each code with the user who authorized it
+(def code "38905845fed429263a9704c0d7d12a257b441a18")
 
 (defn get-activities []
   "this GET route handler will return your json activities from Strava"
@@ -170,16 +166,17 @@
   (GET "/api/logs/get" []
     (get-logs))
 
-  (GET "/api/strava/auth" []
-    (authorize-strava))
+  (GET "/api/strava/token" request
+    (prn "strava code " (get-in request [:params :code]))
+    (redirect "/"))
+
 
   (GET "/api/strava/activities/get" []
     { :status 200
       :content-type "application/json; charset=UTF-8"
       :body (cheshire/generate-string (get-activities))})
 
-  (ANY "*" []
-    (route/not-found "<h1>404 Not found</h1>")))
+  )
 
 (def app
      (-> (site app-routes)

@@ -109,10 +109,16 @@ goog.addDependency("../re_frame/std_interceptors.js", ['re_frame.std_interceptor
 goog.addDependency("../re_frame/subs.js", ['re_frame.subs'], ['re_frame.interop', 're_frame.trace', 're_frame.registrar', 'cljs.core', 're_frame.utils', 're_frame.loggers', 're_frame.db']);
 goog.addDependency("../re_frame/core.js", ['re_frame.core'], ['re_frame.interop', 're_frame.interceptor', 're_frame.events', 're_frame.fx', 're_frame.registrar', 'cljs.core', 're_frame.router', 'clojure.set', 're_frame.std_interceptors', 're_frame.loggers', 're_frame.subs', 're_frame.cofx', 're_frame.db']);
 goog.addDependency("../example/utils/http_fx.js", ['example.utils.http_fx'], ['ajax.core', 'cljs.core', 'clojure.string', 'cljs.spec.alpha', 'goog.net.ErrorCode', 're_frame.core']);
-goog.addDependency("../example/events.js", ['example.events'], ['ajax.core', 'reagent.core', 'cljs.core', 'example.utils.js', 'goog.object', 'reagent.impl.template', 'example.db', 're_frame.core', 'example.utils.http_fx']);
-goog.addDependency("../example/demos/demo_dota2_splash.js", ['example.demos.demo_dota2_splash'], ['material_ui', 'reagent.core', 'cljs.core', 'material_ui_icons', 'example.events', 'reagent.impl.template', 'example.utils.http_fx']);
+goog.addDependency("../example/demos/events.js", ['example.demos.events'], ['ajax.core', 'reagent.core', 'cljs.core', 'example.utils.js', 'goog.object', 'reagent.impl.template', 'example.db', 're_frame.core', 'example.utils.http_fx']);
+goog.addDependency("../no/en/core.js", ['no.en.core'], ['cljs.core', 'goog.crypt.base64', 'clojure.string', 'cljs.reader']);
+goog.addDependency("../cljs_http/util.js", ['cljs_http.util'], ['no.en.core', 'goog.Uri', 'cljs.core', 'goog.userAgent', 'cognitect.transit', 'clojure.string']);
+goog.addDependency("../cljs_http/core.js", ['cljs_http.core'], ['goog.net.Jsonp', 'goog.net.XhrIo', 'cljs.core', 'cljs_http.util', 'cljs.core.async', 'goog.net.EventType', 'clojure.string', 'goog.net.ErrorCode']);
+goog.addDependency("../cljs_http/client.js", ['cljs_http.client'], ['cljs_http.core', 'no.en.core', 'goog.Uri', 'cljs.core', 'cljs_http.util', 'cljs.core.async', 'clojure.string', 'cljs.reader']);
+goog.addDependency("../example/demos/subs.js", ['example.demos.subs'], ['cljs.core', 're_frame.core']);
+goog.addDependency("../example/demos/demo_dota2_splash.js", ['example.demos.demo_dota2_splash'], ['material_ui', 'example.demos.events', 'reagent.core', 'cljs.core', 'cljs_http.client', 'material_ui_icons', 'cljs.core.async', 'reagent.impl.template', 're_frame.core', 'example.utils.http_fx', 'example.demos.subs']);
 goog.addDependency("../example/demos/demo_soloist.js", ['example.demos.demo_soloist'], ['material_ui', 'reagent.core', 'cljs.core', 'material_ui_icons']);
 goog.addDependency("../example/demos/demo_hard_support.js", ['example.demos.demo_hard_support'], ['material_ui', 'reagent.core', 'cljs.core', 'material_ui_icons']);
+goog.addDependency("../example/events.js", ['example.events'], ['ajax.core', 'reagent.core', 'cljs.core', 'example.utils.js', 'goog.object', 'reagent.impl.template', 'example.db', 're_frame.core', 'example.utils.http_fx']);
 goog.addDependency("../example/components/survey.js", ['example.components.survey'], ['material_ui', 'reagent.core', 'cljs.core', 'material_ui_icons', 'example.events', 'reagent.impl.template', 'example.utils.http_fx']);
 goog.addDependency("../example/demos/demo_hard_carry.js", ['example.demos.demo_hard_carry'], ['material_ui', 'reagent.core', 'cljs.core', 'material_ui_icons', 'example.components.survey']);
 goog.addDependency("../example/demos/demo_roaming_support.js", ['example.demos.demo_roaming_support'], ['material_ui', 'reagent.core', 'cljs.core', 'material_ui_icons']);
