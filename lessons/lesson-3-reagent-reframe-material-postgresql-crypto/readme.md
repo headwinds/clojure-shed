@@ -14,11 +14,18 @@ In this lesson, we will work with this cryptography library, [lock-key](https://
 
 ## Getting Started
 
+
+To work on the front end:
 ```
 lein figwheel
 ```
 
 In dev, there is a big API problem between communication between figwheel and the ring server. We need to figure out [figwheel can start the ring server](https://github.com/bhauman/lein-figwheel/tree/master/examples/using-ring-handler) which seems straight forward.
+
+To work on the back end:
+```
+lein ring server
+```
 
 ## Demo
 

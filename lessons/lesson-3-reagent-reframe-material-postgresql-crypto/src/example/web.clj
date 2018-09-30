@@ -7,13 +7,18 @@
             [buddy.core.hash :as hash]
             [buddy.core.codecs :refer :all]
             [clojure.java.jdbc :as j]
+            [ajax.core :as ajax]
             [ring.adapter.jetty :as jetty]
             [example.heroku-config :as heroku-config]
             [ring.util.response :refer [response resource-response]]
             [ring.middleware.ssl :as ssl]
             [ring.middleware.json :as json :refer [wrap-json-body]]
+            [ring.middleware.cors :refer [wrap-cors]]
             [cheshire.core :as cheshire]
-            [environ.core :refer [env]]))
+            [clj-strava.api :as strava]
+            [clojure.core.async :refer [<!!]]
+            [environ.core :refer [env]])
+    (:import [java.net URI URLEncoder]))
 
 ;;-- State
 
@@ -35,6 +40,10 @@
 ;; its even dangerous to store the secret key in the env file
 (def secret-key
   (env :secret-key))
+
+
+(def public-strava-token
+    (valid-env :strava-public-token))
 
 (def open-dota-api
   (str "https://api.opendota.com/api/matches/271145478?api_key="
@@ -60,6 +69,39 @@
 
 (def username-hash-sample "b7f787b6fd62dbf0b97947310a2f786ad4e1f24fd19d8d7f6983d86802dbee23ff8e6b5114c19c633b67b2c239ecfaea97740678f0991ce1bc7d2e3870f7ac41")
 
+(defn get-count [tablename]
+  (j/query pg-db
+    [(str "SELECT COUNT(*) FROM " tablename)]))
+
+(def secret (env :strava-secret))
+
+(def client-id "28964")
+(def redirect-uri "http://localhost/exchange_token")
+(def response-type "code")
+(def scope "view_private,write")
+(def approval-prompt "force")
+(def strava-authorize-url
+  (str "https://www.strava.com/oauth/authorize?"
+       "client_id=" client-id "&"
+       "response_type=" response-type "&"
+       "redirect_uri=" redirect-uri "&"
+       "approval_prompt=" approval-prompt "&"
+       "scope=" scope))
+
+(defn handle-strava-auth [strava-response]
+  (prn "handle-strava-auth: " strava-response))
+
+(defn authorize-strava []
+  (ajax/GET strava-authorize-url {:handler handle-strava-auth}))
+
+(def code "bd12d017f3674ad65f5ea9712cf9c29d5b807112")
+
+(defn get-activities []
+  "this GET route handler will return your json activities from Strava"
+    (let [access-token (strava/access-token code)]
+      (prn "access-token" access-token)
+      (prn "secret" secret)
+      (<!! (strava/activities access-token {"per_page" 5}))))
 
 ;;-- username needs to be is a 128 hash
 (defn save-log [username goal major-bonus minor-bonus sidequest-bonus]
@@ -96,9 +138,9 @@
 
 (defn get-logs
   []
-  (print "db" pg-db)
   (j/query pg-db
     ["select * from log"]))
+
 
 ;;-- Routes
 
@@ -109,10 +151,6 @@
   (route/resources "/")
 
   (GET "/h" [] "Hello World there!")
-
-  (POST "/api/logs/addd" {:keys [params]}
-  (let [{:keys [username]} params]
-    (prn "username" username)))
 
     ;;(let [s (with-out-str (pprint/pprint (conj request {:body (slurp (:body request))})))]
    ;;{:status 200
@@ -132,6 +170,14 @@
   (GET "/api/logs/get" []
     (get-logs))
 
+  (GET "/api/strava/auth" []
+    (authorize-strava))
+
+  (GET "/api/strava/activities/get" []
+    { :status 200
+      :content-type "application/json; charset=UTF-8"
+      :body (cheshire/generate-string (get-activities))})
+
   (ANY "*" []
     (route/not-found "<h1>404 Not found</h1>")))
 
@@ -142,7 +188,9 @@
 
 (def handler
   (-> (site app-routes)
-      (wrap-json-body {:keywords? true :bigdecimals? true})))
+      (wrap-json-body {:keywords? true :bigdecimals? true})
+      (wrap-cors  :access-control-allow-origin [#"http://localhost:5000"]
+                  :access-control-allow-methods [:get :put :post :patch :delete])))
 
 (defn -main [& [port]]
   (let [port (Integer. (or port (env :port) 5000))]

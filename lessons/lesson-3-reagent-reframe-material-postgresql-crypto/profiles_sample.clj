@@ -8,7 +8,10 @@
            :database-host "localhost"
            :database-user "postgres"
            :database-password "your-password"
-           :database-sslmode "disable"}}
+           :database-sslmode "disable"
+           :strava-secret ""
+           :strava-id ""
+           :strava-public-token ""}}
        :dependencies [[com.cemerick/piggieback "0.2.2"]
                                 [figwheel-sidecar "0.5.13"]
                                 [binaryage/devtools "0.9.4"]]
@@ -32,7 +35,10 @@
               :database-host "your-heroku-host"
               :database-user "your-heroku-username"
               :database-password "your-heroku-password"
-              :database-sslmode "require"}}
+              :database-sslmode "require"
+              :strava-secret ""
+              :strava-id ""
+              :strava-public-token ""}}
            :source-paths ["src"]
            :prep-tasks ["compile" ["cljsbuild" "once"]]
            :cljsbuild {:builds [{:id "production"

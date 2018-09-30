@@ -30,25 +30,23 @@
 ;; Post Log
 
 (re/reg-event-fx :post-add-log
-(fn [{db :db} [_ vals]]
-  (let [username @(:username vals)
-        goal @(:goal vals)
-        major-bonus @(:major-bonus vals)
-        minor-bonus @(:major-bonus vals)
-        sidequest-bonus @(:sidequest-bonus vals)
+  (fn [{db :db} [_ vals]]
+    (let [username @(:username vals)
+          goal @(:goal vals)
+          major-bonus @(:major-bonus vals)
+          minor-bonus @(:major-bonus vals)
+          sidequest-bonus @(:sidequest-bonus vals)
 
-        payload {:username username
-                 :goal goal
-                 :major-bonus major-bonus
-                 :minor-bonus minor-bonus
-                 :sidequest-bonus sidequest-bonus}]
+          payload {:username username
+                   :goal goal
+                   :major-bonus major-bonus
+                   :minor-bonus minor-bonus
+                   :sidequest-bonus sidequest-bonus}]
 
-   {:http-xhrio (POST "/api/logs/add"
-                      payload
-                      :format          (ajax/json-request-format)
-                      :response-format (ajax/json-response-format {:keywords? true})
-                      :post-add-log-success
-                      :post-add-log-fail)})))
+     {:http-xhrio (POST "/api/logs/add"
+                        payload
+                        :post-add-log-success
+                        :post-add-log-fail)})))
 
 (re/reg-event-db :post-add-log-success
   (fn [db [_ response]]
@@ -89,6 +87,70 @@
  (fn [db [_ response]]
    (-> db
        (assoc :error response))))
+
+;;-- STRAVA
+;; https://yizeng.me/2017/01/11/get-a-strava-api-access-token-with-write-permission/
+
+;;-- http://localhost/exchange_token?state=&code=bd12d017f3674ad65f5ea9712cf9c29d5b807112&scope=view_private,write
+
+(def code "bd12d017f3674ad65f5ea9712cf9c29d5b807112")
+
+(def client-id "28964")
+(def redirect-uri "http://localhost/exchange_token")
+(def response-type "code")
+(def scope "view_private,write")
+(def approval-prompt "force")
+(def strava-authorize-url
+  (str "https://www.strava.com/oauth/authorize?"
+       "client_id=" client-id "&"
+       "response_type=" response-type "&"
+       "redirect_uri=" redirect-uri "&"
+       "approval_prompt=" approval-prompt "&"
+       "scope=" scope))
+
+(re/register-handler :strava-authorize             ;; <-- the button dispatched this id
+ (fn
+   [db _]
+   (print "GET auth: " strava-authorize-url)
+   {:http-xhrio (GET
+     strava-authorize-url
+     :process-response
+     :bad-response)}))
+
+(re/register-handler               ;; when the GET succeeds
+  :process-response             ;; the GET callback dispatched this event
+  (fn
+    [db [_ response]]           ;; extract the response from the dispatch event vector
+    (-> db
+        (assoc :loading? false) ;; take away that modal
+        (assoc :data (js->clj response)))
+        (print "good response" response)))
+
+(re/register-handler               ;; when the GET succeeds
+  :bad-response             ;; the GET callback dispatched this event
+  (fn
+    [db [_ response]]           ;; extract the response from the dispatch event vector
+    (-> db
+        (assoc :loading? false) ;; take away that modal
+        (assoc :data (js->clj response)))
+      (print "bad response" response) ) )
+
+ (re/reg-event-fx :get-authorize-strava
+  (fn [{db :db} [_ vals]]
+    {:http-xhrio (GET "/api/strava/authorize"
+                       :get-authorize-strava-success
+                       :get-authorize-strava-fail)}
+   ))
+
+ (re/reg-event-db :get-authorize-strava-success
+  (fn [db [_ response]]
+    (print "strava authoize success " response)
+    ))
+
+ (re/reg-event-db :get-authorize-strava-fail
+  (fn [db [_ response]]
+        (print "strava authoize fail " response)))
+
 
 ;;-- OPEN DOTA
 
