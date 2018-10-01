@@ -2,13 +2,15 @@
 
 Unlike major sports, eSports is still a phenomenon on the fringe. Unless you play the games, you probably aren't aware of the live tournaments, the millions in prize money, and the players who dedicate their lives to the game.
 
-In this lesson, we will work with this cryptography library, [lock-key](https://github.com/clavoie/lock-key), which basically relies on the [Java implementation](https://stackoverflow.com/questions/10221257/is-there-an-aes-library-for-clojure) of AES, to encrypt Dota 2 tactics which only team mates can decrypt.  
+Gamers have a potato stereotype but many hardcore athletes. What if there work outs could fuel and influence their favourite game?
+
 
 * [Reagent](https://github.com/reagent-project/reagent)
 * [Re-frame](https://github.com/Day8/re-frame)
 * [Material UI](https://material-ui.com/)
-# [Caesium](https://github.com/lvh/caesium)
-# [PostgreSQL, DBeaver, & Heroku](http://thebar.cc/connecting-dbeaver-to-a-heroku-postgres-database/)
+* [Buddy](https://github.com/funcool/buddy)
+* [Clj-Strava](https://github.com/ekimber/clj-strava)
+* [PostgreSQL, DBeaver, & Heroku](http://thebar.cc/connecting-dbeaver-to-a-heroku-postgres-database/)
 
 ![screenshot](gallery.png)
 
