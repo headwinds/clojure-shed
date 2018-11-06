@@ -18,12 +18,7 @@ $ lein repl
 $ user=> (require 'app.web)
 $ user=> (def server (app.web/-main))
 ```     
-
-## Reload the REPL
-
-```
-???
-```      
+   
 
 ## Deploy to Heroku
 

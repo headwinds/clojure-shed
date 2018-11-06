@@ -7,13 +7,15 @@
                  [compojure "1.4.0"]
                  [ring/ring-json "0.3.1"]
                  [ring/ring-jetty-adapter "1.4.0"]
+                 [ring-cors "0.1.12"]
                  [environ "1.1.0"]
                  [org.clojure/java.jdbc "0.6.1"]
                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [hiccup "1.0.5"]]
   :min-lein-version "2.0.0"
   :plugins [[lein-environ "1.1.0"]]
-  :uberjar-name "clojure-getting-started-standalone.jar"
+  :uberjar-name "pilot.jar"
+  :main app.web
   :profiles { :dev [:project/dev :profiles/dev]
               :test [:project/test :profiles/test]
               :production [:project/production :profiles/production]

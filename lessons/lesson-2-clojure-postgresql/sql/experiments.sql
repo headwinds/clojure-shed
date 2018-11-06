@@ -67,6 +67,23 @@ WITH
   from colonist_table,profession_table;
 
 
+-- Q & A
+
+CREATE TABLE answer (
+  answer_id serial primary key,
+  answer varchar(255) NOT NULL,
+  customer varchar(100) NOT NULL,
+  colonist_id serial references colonist(colonist_id) ON DELETE CASCADE,
+  question_id serial references question(question_id),
+  created_timestamp timestamp default current_timestamp);
+
+CREATE TABLE question (
+  question_id serial primary key,
+  question varchar(255) NOT NULL,
+  answer varchar(255) NOT NULL,
+  colonist_id serial references colonist(colonist_id) ON DELETE CASCADE,
+  created_timestamp timestamp default current_timestamp);
+
 -- from the terminal, sign into postgresql using the username postgres
 $ psql --u postgres
 

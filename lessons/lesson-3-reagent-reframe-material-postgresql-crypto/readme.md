@@ -92,3 +92,9 @@ Then open your browser whatever url it created ie: https://glacial-badlands-2078
 * [Dota 2 Guide Competitive Positions](https://imperium.news/dota-2-guide-competitive-positions/)
 * [Normal Person's Guide to Watching Dota2](https://www.polygon.com/2016/8/8/12401068/dota-2-watching-guide)
 * [Dota 2 Logo](https://www.flaticon.com/free-icon/dota-2_588267)
+
+## Clojure Roguelike
+
+* [caves-of-clojure](http://stevelosh.com/blog/2012/07/caves-of-clojure-01/)
+* [game-development-in-clojure](https://clojurefun.wordpress.com/2013/03/21/game-development-in-clojure-alchemy-7drl-post-mortem/)
+* [Clojure rogue-like-like-like-like-like because why not?](https://github.com/aaron-santos/robinson)

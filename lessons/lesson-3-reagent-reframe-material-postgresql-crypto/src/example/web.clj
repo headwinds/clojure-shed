@@ -10,10 +10,10 @@
             [ajax.core :as ajax]
             [clj-http.client :as client]
             [ring.adapter.jetty :as jetty]
-            [example.heroku-config :as heroku-config]
             [ring.util.response :refer [response resource-response redirect]]
             [ring.middleware.ssl :as ssl]
             [ring.middleware.json :as json :refer [wrap-json-body]]
+            [example.heroku-config :as heroku-config]
             [ring.middleware.cors :refer [wrap-cors]]
             [cheshire.core :as cheshire]
             [clj-strava.api :as strava]
@@ -113,24 +113,6 @@
              :sidequest_bonus sidequest-bonus-ciphertext }]
              (prn row)
         (j/insert! pg-db :log row)))
-
-;;-- username needs to be is a 128 hash
-(defn save-logss [username goal major-bonus minor-bonus sidequest-bonus]
-  (let [username-128-hash (hash-username username)
-        goal-ciphertext (encrypt goal)
-        major-bonus-ciphertext (encrypt  major-bonus)
-        minor-bonus-ciphertext (encrypt minor-bonus)
-        sidequest-bonus-ciphertext (encrypt sidequest-bonus)
-        query (str "INSERT INTO log (username, goal, major_bonus, minor_bonus, sidequest_bonus ) VALUES ('"
-                  username-128-hash "','"
-                  goal-ciphertext "','"
-                  major-bonus-ciphertext "','"
-                  minor-bonus-ciphertext "','"
-                  sidequest-bonus-ciphertext "');")
-      _ (prn "enc query: " query)]
-
-        (j/insert! pg-db
-          [query])))
 
 (defn get-logs
   []

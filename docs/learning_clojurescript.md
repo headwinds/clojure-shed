@@ -60,3 +60,19 @@ You should see this screen in your browser:
 [Flashcards](https://github.com/alexanderjamesking/flashcards)
 
 [etudes for clojurescript](https://github.com/jdeisenberg/etudes-for-clojurescript)
+
+# Reagent & Re-frame examples
+
+[reagent & reframe containers article ](https://medium.com/@kirill.ishanov/using-containers-with-reagent-and-re-frame-ba88c481335d)
+
+[reagent & reframe containers github](https://github.com/kishanov/reagent-containers-demo)
+
+[noobs walkthrough article](http://www.multunus.com/blog/2016/02/noobs-walkthrough-re-frame-app/)
+
+[noobs walkthrough github](https://github.com/tacticiankerala/re-frame-sample-app)
+
+[re-frame building block](https://purelyfunctional.tv/guide/re-frame-building-blocks/)
+
+[SPA clojurescript article](https://www.exoscale.com/syslog/single-page-application-with-clojurescript-and-reframe/)
+
+[SPA clojurescript github](https://github.com/exoscale/ping-times)
