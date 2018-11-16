@@ -9,7 +9,12 @@
             [app.heroku-config :as heroku-config]
             [ring.middleware.cors :refer [wrap-cors]]
             [ring.middleware.json :as middleware]
+            [cheshire.core :refer [generate-string parse-string]]
+            [postgre-types.json :refer [add-json-type]]
             [environ.core :refer [env]]))
+
+  ;; https://github.com/siscia/postgres-type
+  (add-json-type generate-string parse-string)
 
   ;; heroku is not picking up my env uberjar setting but when I hardcode it works!
   ;; so this is a bandaid until we sort out that issue
@@ -38,6 +43,18 @@
   (j/query pg-db
     [query])))
 
+(defn get-latest-colonist-profile
+      [colonist-id]
+        (let [query  (str "SELECT * FROM profile WHERE colonist_id = '" colonist-id "' order by updated_at desc limit 1;")]
+      (j/query pg-db
+        [query])))
+
+(defn get-colonist-answers
+  [colonist-id]
+    (let [query  (str "SELECT * FROM answer WHERE colonist_id = '" colonist-id "';")]
+  (j/query pg-db
+    [query])))
+
 (defn get-answers
   [offset]
   (j/query pg-db
@@ -48,25 +65,58 @@
   (j/query pg-db
     [(str "SELECT * FROM question ORDER BY created_timestamp DESC OFFSET " offset " LIMIT " limit)]))
 
-(defn post-answer
-  [question-id answer colonist-id]
-  (let [row {:question-id question-id
-             :answer answer
-             :colonist-id colonist-id}]
+; answer is a json string like
+; '{"name": "Paint house", "tags": ["Improvements", "Office"], "finished": true}'
+
+(defn insert-answer
+  [question-label answer colonist-id]
+  (let [row {:question_label question-label
+             :answer {"answer" answer}
+             :colonist_id colonist-id}]
   (j/insert! pg-db :answer row)))
 
-(defn post-question
+(defn insert-question
   [question answer colonist-id]
   (let [row {:question question
              :answer answer
              :colonist_id colonist-id}]
   (j/insert! pg-db :question row)))
 
+(defn update-colonist-profile-experience
+  [colonist_experience colonist_id]
+  (j/update! pg-db :profile {:colonist_experience colonist_experience} ["colonist_id = ?" colonist_id]))
 
-(defn splash []
-  {:status 200
-   :headers {"Content-Type" "text/plain"}
-   :body "Hello world"})
+(defn get-content [] )
+
+(defn get-result [] )
+
+  (defn get-win-rate []
+    (if-let [content (get-content)]
+      (let [result (get-result)]
+        (if bytes
+          {:status 200
+           :headers {"Content-Type" "text/plain"}
+           :body (str result "%")}
+           {:status 404
+            :body "Result not found"}))
+       {:status 406
+        :body "Not Acceptable"}
+     ))
+
+  (defn get-longest-win-streak []
+   {:status 200
+    :headers {"Content-Type" "text/plain"}
+    :body "6"})
+
+  (defn get-win-rate []
+    {:status 200
+     :headers {"Content-Type" "text/plain"}
+     :body "8"})
+
+   (defn get-wins-against-my-rival []
+     {:status 200
+      :headers {"Content-Type" "text/plain"}
+      :body "3"})
 
 (defroutes app-routes
   (GET "/" []
@@ -74,16 +124,21 @@
   (route/resources "/")
 
  (POST "/post-answer" request
-   (let [question-id (get-in request [:body :answer-id])
+   (let [question-label (get-in request [:body :question_label])
          answer (get-in request [:body :answer])
-         colonist-id (get-in request [:body :colonist-id])]
-         (post-answer question-id answer colonist-id)))
+         colonist-id (get-in request [:body :colonist_id])]
+         (insert-answer question-label answer colonist-id)))
 
  (POST "/post-question" request
    (let [question (get-in request [:body :question])
          answer (get-in request [:body :answer])
          colonist-id (get-in request [:body :colonist_id])]
-         (post-question question answer colonist-id)))
+         (insert-question question answer colonist-id)))
+
+ (POST "/post-update-colonist-experience" request
+   (let [colonist_experience (get-in request [:body :colonist_experience])
+         colonist_id (get-in request [:body :colonist_id])]
+         (update-colonist-profile-experience  colonist_experience colonist_id)))
 
   (GET "/lesson-2" []
        (resource-response "lesson-2.html"))
@@ -93,9 +148,18 @@
 
   (GET "/get-colonist" request
     (let [colonist-name (get-in request [:params :name])]
-       ;(get-colonist name)
        (get-colonist colonist-name)
        ))
+
+ (GET "/get-latest-colonist-profile" request
+   (let [colonist-id (get-in request [:params :id])]
+      (get-latest-colonist-profile colonist-id)
+      ))
+
+ (GET "/get-colonist-answers" request
+   (let [colonist-id (get-in request [:params :id])]
+      (get-colonist-answers colonist-id)
+      ))
 
   (GET "/get-colonists" request
     (let [offset (* (- (read-string (get-in request [:params :page])) 1) limit)]
@@ -107,8 +171,14 @@
   (GET "/get-questions" []
        (get-questions))
 
-  (GET "/test" []
-       (splash))
+  (GET "/get-win-rate" []
+       (get-win-rate))
+
+  (GET "/get-longest-win-streak" []
+      (get-longest-win-streak))
+
+   (GET "/get-wins-against-my-rival" []
+      (get-wins-against-my-rival))
 
   (ANY "*" []
        (route/not-found (slurp (io/resource "404.html")))))
@@ -116,7 +186,8 @@
 (def app
   (-> (site app-routes)
       (middleware/wrap-json-body {:keywords? true})
-      (wrap-cors  :access-control-allow-origin [#"http://localhost:3000"]
+      (wrap-cors  :access-control-allow-origin [#"http://localhost:3000"
+                                                #"http://localhost:8000"]
                   :access-control-allow-methods [:get :put :post :patch :delete])
       middleware/wrap-json-response))
 

@@ -1,21 +1,21 @@
 CREATE TABLE colonist (
   colonist_id serial primary key,
   colonist_name varchar(20) UNIQUE NOT NULL,
-  colonist_level SMALLINT NOT NULL,
-  timestamp timestamp default current_timestamp);
+  created_at timestamp default current_timestamp,
+  updated_at timestamp default current_timestamp);
 
 -- Create a colonist
 
-INSERT INTO colonist (colonist_name, colonist_level) VALUES
-    ('Han', 4);
+INSERT INTO colonist (colonist_name) VALUES
+    ('Han');
 
 -- Create multiple colonist
 
-INSERT INTO colonist (colonist_name, colonist_level)
+INSERT INTO colonist (colonist_name)
 VALUES
-    ('Luke', 1),
-    ('Leia', 6),
-    ('Vader', 10);
+    ('Luke'),
+    ('Leia'),
+    ('Vader');
 
 -- Create their professions
 
@@ -71,18 +71,49 @@ WITH
 
 CREATE TABLE answer (
   answer_id serial primary key,
-  answer varchar(255) NOT NULL,
-  customer varchar(100) NOT NULL,
+  answer jsonb NOT NULL,
   colonist_id serial references colonist(colonist_id) ON DELETE CASCADE,
-  question_id serial references question(question_id),
-  created_timestamp timestamp default current_timestamp);
+  question_label varchar(255) references question(question_label),
+  created_at timestamp default current_timestamp);
 
 CREATE TABLE question (
   question_id serial primary key,
+  question_label varchar(255) UNIQUE NULL,
   question varchar(255) NOT NULL,
-  answer varchar(255) NOT NULL,
+  answer varchar(255) NULL default 'no answer',
+  answer_viz varchar(100) NULL,
   colonist_id serial references colonist(colonist_id) ON DELETE CASCADE,
-  created_timestamp timestamp default current_timestamp);
+  created_at timestamp default current_timestamp);
+
+INSERT INTO question (question_label, question, answer, answer_viz, colonist_id) VALUES
+  ('gamertag', 'What is your gamer tag?', '', 'string', 4),
+  ('background', 'Which background would you like for your profile?', '', 'image', 4),
+  ('you', 'Which image best represents you?', '','bubble', 4),
+  ('games', 'Which of these games do you like?', '','bubble', 4),
+  ('teams', 'Which of these teams do you like?', '','bubble',4),
+  ('casters', 'Which of these casters do you like?', '','bubble',4),
+  ('rival', 'Who is your rival?', 'headwinds','string',4),
+  ('pin', 'Which of these would like to pin next to your gamertag?','headwinds', 'select', 4);
+
+
+
+CREATE TABLE achievement (
+  achievement_id serial primary key,
+  achievement_label varchar(255) NULL,
+  achievement varchar(255) NOT NULL;
+
+CREATE TABLE profile (
+  profile_id serial primary key,
+  colonist_experience int NOT NULL default 0,
+  colonist_level SMALLINT NOT NULL default 0,
+  answered_total SMALLINT NOT NULL default 0,
+  colonist_id serial references colonist(colonist_id) ON DELETE CASCADE,
+  created_at timestamp default current_timestamp,
+  updated_at timestamp default current_timestamp);
+
+-- add Han to test with
+INSERT INTO profile (colonist_id) VALUES (4);
+
 
 -- from the terminal, sign into postgresql using the username postgres
 $ psql --u postgres

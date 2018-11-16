@@ -10,13 +10,12 @@ Since you are building an API, there are two apps in play here split between fro
 
 ## dependencies
 
-* [clojure](https://blog.venanti.us/why-clojure/)
-* [compojure](https://github.com/weavejester/compojure/wiki)
-* [ring](https://github.com/ring-clojure/ring/wiki)
-* [postgreSQL](https://www.infoworld.com/article/3240064/sql/why-old-school-postgresql-is-so-hip-again.html)
-* [environ](https://yobriefca.se/blog/2014/04/29/managing-environment-variables-in-clojure/)
-* [hiccup](https://github.com/weavejester/hiccup)
-
+- [clojure](https://blog.venanti.us/why-clojure/)
+- [compojure](https://github.com/weavejester/compojure/wiki)
+- [ring](https://github.com/ring-clojure/ring/wiki)
+- [postgreSQL](https://www.infoworld.com/article/3240064/sql/why-old-school-postgresql-is-so-hip-again.html)
+- [environ](https://yobriefca.se/blog/2014/04/29/managing-environment-variables-in-clojure/)
+- [hiccup](https://github.com/weavejester/hiccup)
 
 # Getting Started
 
@@ -24,7 +23,7 @@ Since you are building an API, there are two apps in play here split between fro
 
 ```
 $ lein run
-```   
+```
 
 ## Frontend - Trophy Creator
 
@@ -43,8 +42,6 @@ To build & start for production:
   yarn start
 ```
 
-
-
 ## Deploy to Heroku
 
 Copy this lesson into a new directory outside of this git repo so that it has it own git repo. We don't want to have nested repos.
@@ -61,15 +58,19 @@ git push heroku master
 heroku ps:scale web=1
 heroku open
 ```
-Then open your browser whatever url it created ie: https://glacial-badlands-20785.herokuapp.com/     
 
+Then open your browser whatever url it created ie: https://glacial-badlands-20785.herokuapp.com/
 
 ## Inspiration
 
-Watch [Obvillion](https://www.wired.com/2013/04/oblivion-movie-questions/) then watch [the making of...](https://www.youtube.com/watch?v=iYryNL1FlPk)   
+Watch [Obvillion](https://www.wired.com/2013/04/oblivion-movie-questions/) then watch [the making of...](https://www.youtube.com/watch?v=iYryNL1FlPk)
 
 ## Reading
 
-[An Animated Introduction to Clojure](https://ourcodestories.com/markm208/Playlist/4)    
+[An Animated Introduction to Clojure](https://ourcodestories.com/markm208/Playlist/4)  
 [this Rich Hickey thread](https://twitter.com/richhickey/status/1057970957040660480)
 [understanding lein run](http://www.flyingmachinestudios.com/programming/how-clojure-babies-are-made-lein-run/)
+[clojure postgres](https://web.archive.org/web/20161024231548/http://hiim.tv/clojure/2014/05/15/clojure-postgres-json/)
+[clj-postgresql](https://github.com/remodoy/clj-postgresql)
+[hugsql](https://www.compose.com/articles/embrace-sql-with-hugsql-clojure-and-postgresql/)
+[postgres clojure java jbdc](http://peterstratton.com/posts-output/2017-01-28-postgres-and-clojure-using-clojure-java-jdbc/)
