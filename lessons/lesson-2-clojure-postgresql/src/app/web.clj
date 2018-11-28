@@ -18,7 +18,12 @@
 
   ;; heroku is not picking up my env uberjar setting but when I hardcode it works!
   ;; so this is a bandaid until we sort out that issue
-  (def valid-env (if (nil? (env :database-password)) heroku-config/en env))
+  (def valid-enva (if
+                    (nil? (env :database-password))
+                      heroku-config/en
+                      env))
+
+  (def valid-env (:env heroku-config/en))
 
   (def pg-db {:dbtype "postgresql"
               :dbname (:database-dbname valid-env)
@@ -35,7 +40,7 @@
 (defn get-colonists
   [offset]
   (j/query pg-db
-    [(str "SELECT * FROM colonist ORDER BY timestamp DESC OFFSET " offset " LIMIT " limit)]))
+    [(str "SELECT * FROM colonist ORDER BY created_at DESC OFFSET " offset " LIMIT " limit)]))
 
 (defn get-colonist
   [colonist-name]
@@ -49,6 +54,8 @@
       (j/query pg-db
         [query])))
 
+ ;;-- Answers
+
 (defn get-colonist-answers
   [colonist-id]
     (let [query  (str "SELECT * FROM answer WHERE colonist_id = '" colonist-id "';")]
@@ -58,16 +65,23 @@
 (defn get-answers
   [offset]
   (j/query pg-db
-    [(str "SELECT * FROM answer ORDER BY created_timestamp DESC OFFSET " offset " LIMIT " limit)]))
+    [(str "SELECT * FROM answer ORDER BY created_at DESC OFFSET " offset " LIMIT " limit)]))
+
+(defn delete-all-my-answers
+  [colonist_id]
+  (j/delete! pg-db :answer ["colonist_id = ?" colonist_id])
+  (j/query pg-db ["SELECT * FROM answer WHERE colonist_id = ?" colonist_id]))
+
+;;-- Questions
 
 (defn get-questions
   [offset]
   (j/query pg-db
-    [(str "SELECT * FROM question ORDER BY created_timestamp DESC OFFSET " offset " LIMIT " limit)]))
+    [(str "SELECT * FROM question ORDER BY created_at DESC OFFSET " offset " LIMIT " limit)]))
 
 ; answer is a json string like
 ; '{"name": "Paint house", "tags": ["Improvements", "Office"], "finished": true}'
-
+; instead of creating json here, it would be easier to create it from the client!!!!
 (defn insert-answer
   [question-label answer colonist-id]
   (let [row {:question_label question-label
@@ -82,9 +96,11 @@
              :colonist_id colonist-id}]
   (j/insert! pg-db :question row)))
 
-(defn update-colonist-profile-experience
+(defn update-profile-experience
   [colonist_experience colonist_id]
-  (j/update! pg-db :profile {:colonist_experience colonist_experience} ["colonist_id = ?" colonist_id]))
+  (j/update! pg-db :profile {:colonist_experience colonist_experience} ["colonist_id = ?" colonist_id])
+  (get-latest-colonist-profile colonist_id)
+  )
 
 (defn get-content [] )
 
@@ -135,10 +151,10 @@
          colonist-id (get-in request [:body :colonist_id])]
          (insert-question question answer colonist-id)))
 
- (POST "/post-update-colonist-experience" request
+ (PUT "/put-profile-experience" request
    (let [colonist_experience (get-in request [:body :colonist_experience])
          colonist_id (get-in request [:body :colonist_id])]
-         (update-colonist-profile-experience  colonist_experience colonist_id)))
+         (update-profile-experience  colonist_experience colonist_id)))
 
   (GET "/lesson-2" []
        (resource-response "lesson-2.html"))
@@ -180,6 +196,11 @@
    (GET "/get-wins-against-my-rival" []
       (get-wins-against-my-rival))
 
+  (DELETE "/delete-all-my-answers" request
+    (let [colonist-id (get-in request [:params :id])]
+       (delete-all-my-answers colonist-id)
+       ))
+
   (ANY "*" []
        (route/not-found (slurp (io/resource "404.html")))))
 
@@ -187,6 +208,7 @@
   (-> (site app-routes)
       (middleware/wrap-json-body {:keywords? true})
       (wrap-cors  :access-control-allow-origin [#"http://localhost:3000"
+                                                #"https://rivalry-profile.now.sh"
                                                 #"http://localhost:8000"]
                   :access-control-allow-methods [:get :put :post :patch :delete])
       middleware/wrap-json-response))

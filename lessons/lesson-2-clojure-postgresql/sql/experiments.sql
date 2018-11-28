@@ -67,14 +67,7 @@ WITH
   from colonist_table,profession_table;
 
 
--- Q & A
-
-CREATE TABLE answer (
-  answer_id serial primary key,
-  answer jsonb NOT NULL,
-  colonist_id serial references colonist(colonist_id) ON DELETE CASCADE,
-  question_label varchar(255) references question(question_label),
-  created_at timestamp default current_timestamp);
+-- Q & A - Q gets made first!
 
 CREATE TABLE question (
   question_id serial primary key,
@@ -83,6 +76,13 @@ CREATE TABLE question (
   answer varchar(255) NULL default 'no answer',
   answer_viz varchar(100) NULL,
   colonist_id serial references colonist(colonist_id) ON DELETE CASCADE,
+  created_at timestamp default current_timestamp);
+
+CREATE TABLE answer (
+  answer_id serial primary key,
+  answer jsonb NOT NULL,
+  colonist_id serial references colonist(colonist_id) ON DELETE CASCADE,
+  question_label varchar(255) references question(question_label),
   created_at timestamp default current_timestamp);
 
 INSERT INTO question (question_label, question, answer, answer_viz, colonist_id) VALUES
@@ -94,8 +94,6 @@ INSERT INTO question (question_label, question, answer, answer_viz, colonist_id)
   ('casters', 'Which of these casters do you like?', '','bubble',4),
   ('rival', 'Who is your rival?', 'headwinds','string',4),
   ('pin', 'Which of these would like to pin next to your gamertag?','headwinds', 'select', 4);
-
-
 
 CREATE TABLE achievement (
   achievement_id serial primary key,
@@ -113,6 +111,8 @@ CREATE TABLE profile (
 
 -- add Han to test with
 INSERT INTO profile (colonist_id) VALUES (4);
+
+INSERT INTO profile (colonist_id) VALUES (1),(2),(3),(5),(6);
 
 
 -- from the terminal, sign into postgresql using the username postgres

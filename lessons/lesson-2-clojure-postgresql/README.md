@@ -67,10 +67,10 @@ Watch [Obvillion](https://www.wired.com/2013/04/oblivion-movie-questions/) then 
 
 ## Reading
 
-[An Animated Introduction to Clojure](https://ourcodestories.com/markm208/Playlist/4)  
-[this Rich Hickey thread](https://twitter.com/richhickey/status/1057970957040660480)
-[understanding lein run](http://www.flyingmachinestudios.com/programming/how-clojure-babies-are-made-lein-run/)
-[clojure postgres](https://web.archive.org/web/20161024231548/http://hiim.tv/clojure/2014/05/15/clojure-postgres-json/)
-[clj-postgresql](https://github.com/remodoy/clj-postgresql)
-[hugsql](https://www.compose.com/articles/embrace-sql-with-hugsql-clojure-and-postgresql/)
-[postgres clojure java jbdc](http://peterstratton.com/posts-output/2017-01-28-postgres-and-clojure-using-clojure-java-jdbc/)
+ * [postgres clojure java jbdc](http://peterstratton.com/posts-output/2017-01-28-postgres-and-clojure-using-clojure-java-jdbc/) (*highly recommend*)
+* [An Animated Introduction to Clojure](https://ourcodestories.com/markm208/Playlist/4)  
+* [this Rich Hickey thread](https://twitter.com/richhickey/status/1057970957040660480)
+* [understanding lein run](http://www.flyingmachinestudios.com/programming/how-clojure-babies-are-made-lein-run/)
+* [clojure postgres](https://web.archive.org/web/20161024231548/http://hiim.tv/clojure/2014/05/15/clojure-postgres-json/)
+* [clj-postgresql](https://github.com/remodoy/clj-postgresql)
+* [hugsql](https://www.compose.com/articles/embrace-sql-with-hugsql-clojure-and-postgresql/)
