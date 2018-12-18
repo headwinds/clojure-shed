@@ -1,7 +1,12 @@
+
 # clojure-shed
 * explore a series of lessons that build up your Clojure & ClojureScript skills gradually
 * the final lesson produces a simple API to store stuff securely using Clojure, Clojurescript, Leiningen, Crypto, and PostgreSQL deployed to Heroku
 * geek out & fantasize about colonizing mars and decide what essentials we'd bring along on our trip
+
+![](https://66.media.tumblr.com/8ff3c3639da840033e81d276b1b256b4/tumblr_ph2w8qYXTT1qzwmsso1_1280.jpg?v=4&s=400)
+
+[“The Moose Shed”](https://cabinporn.com/post/180586468964) a hunter’s cabin in Masardis,...
 
 ## Lessons
 
