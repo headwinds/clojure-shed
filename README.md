@@ -12,9 +12,9 @@
 
 Complete 1/3
 
-* lesson 1 Clojure - map, filter, find, reduce - [view online](https://glacial-badlands-20785.herokuapp.com/)
-* lesson 2 Clojure PostgreSQL (featuring the Star Wars API) - 75% complete
-* lesson 3 Clojure (with Crypto, Dota 2 & Strava APIs) PostgreSQL ClojureScript (with Reagent & Reframe) - 75% complete
+* [lesson 1](https://github.com/headwinds/clojure-shed/tree/master/lessons/lesson-1-clojure) Clojure - map, filter, find, reduce - [view online](https://glacial-badlands-20785.herokuapp.com/)
+* [lesson 2](https://github.com/headwinds/clojure-shed/tree/master/lessons/lesson-2-clojure-postgresql) Clojure PostgreSQL (featuring the Star Wars API) - 75% complete
+* [lesson 3](https://github.com/headwinds/clojure-shed/tree/master/lessons/lesson-3-reagent-reframe-material-postgresql-crypto) Clojure (with Crypto, Dota 2 & Strava APIs) PostgreSQL ClojureScript (with Reagent & Reframe) - 75% complete
 
 ## Requirements
 

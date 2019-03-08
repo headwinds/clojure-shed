@@ -9,10 +9,11 @@ CREATE TABLE colonist (
 INSERT INTO colonist (colonist_name) VALUES
     ('Han');
 
--- Create multiple colonist
+-- Or Create multiple colonists at once
 
 INSERT INTO colonist (colonist_name)
 VALUES
+    ('Han'),
     ('Luke'),
     ('Leia'),
     ('Vader');
@@ -98,7 +99,7 @@ INSERT INTO question (question_label, question, answer, answer_viz, colonist_id)
 CREATE TABLE achievement (
   achievement_id serial primary key,
   achievement_label varchar(255) NULL,
-  achievement varchar(255) NOT NULL;
+  achievement varchar(255) NOT NULL);
 
 CREATE TABLE profile (
   profile_id serial primary key,
@@ -112,7 +113,17 @@ CREATE TABLE profile (
 -- add Han to test with
 INSERT INTO profile (colonist_id) VALUES (4);
 
-INSERT INTO profile (colonist_id) VALUES (1),(2),(3),(5),(6);
+-- OR all at once...
+INSERT INTO profile (colonist_id) VALUES (1),(2),(3),(4),(5),(6);
+
+CREATE TABLE events (
+  event_id serial primary key,
+  event_label varchar(255) NULL,
+  event_device varchar(255) NULL,
+  event_app varchar(255) NULL,
+  event_who varchar(255) NULL,
+  event_description varchar(255) NOT NULL,
+  created_at timestamp default current_timestamp);
 
 
 -- from the terminal, sign into postgresql using the username postgres

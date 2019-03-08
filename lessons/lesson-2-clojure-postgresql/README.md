@@ -21,6 +21,10 @@ Since you are building an API, there are two apps in play here split between fro
 
 ## Backend - Trophy Shed
 
+Before you run, you need to create your own config files that will talk to postgres on Heroku. Locate 
+the heroku_config_sample.clj and rename it to heroku_config.clj with your settings. Repeat this process for profiles_sample.clj.
+
+
 ```
 $ lein run
 ```
@@ -59,7 +63,7 @@ heroku ps:scale web=1
 heroku open
 ```
 
-Then open your browser whatever url it created ie: https://glacial-badlands-20785.herokuapp.com/
+Then open your browser to whatever url it created ie: https://glacial-badlands-20785.herokuapp.com/
 
 ## Inspiration
 

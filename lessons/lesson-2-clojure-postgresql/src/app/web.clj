@@ -7,6 +7,7 @@
             [ring.adapter.jetty :as jetty]
             [ring.util.response :refer [response resource-response]]
             [app.heroku-config :as heroku-config]
+            [app.local-config :as local-config]
             [ring.middleware.cors :refer [wrap-cors]]
             [ring.middleware.json :as middleware]
             [cheshire.core :refer [generate-string parse-string]]
@@ -16,6 +17,9 @@
   ;; https://github.com/siscia/postgres-type
   (add-json-type generate-string parse-string)
 
+  ;; (defn get-config [] heroku-config/en)
+  ;; (defn get-config [] heroku-config/en)
+
   ;; heroku is not picking up my env uberjar setting but when I hardcode it works!
   ;; so this is a bandaid until we sort out that issue
   (def valid-enva (if
@@ -24,6 +28,14 @@
                       env))
 
   (def valid-env (:env heroku-config/en))
+
+   (def pg-db-l { :dbtype "postgresql"
+                :dbname (:database-dbname valid-env)
+                :host (:database-host valid-env)
+                :port "5432"
+                :user (:database-user valid-env)
+                :password (:database-password valid-env)
+                })
 
   (def pg-db {:dbtype "postgresql"
               :dbname (:database-dbname valid-env)
@@ -79,6 +91,13 @@
   (j/query pg-db
     [(str "SELECT * FROM question ORDER BY created_at DESC OFFSET " offset " LIMIT " limit)]))
 
+;;-- Events
+
+(defn get-events
+  [offset]
+  (j/query pg-db
+    [(str "SELECT * FROM events ORDER BY created_at DESC OFFSET " offset " LIMIT " limit)]))
+
 ; answer is a json string like
 ; '{"name": "Paint house", "tags": ["Improvements", "Office"], "finished": true}'
 ; instead of creating json here, it would be easier to create it from the client!!!!
@@ -96,11 +115,19 @@
              :colonist_id colonist-id}]
   (j/insert! pg-db :question row)))
 
+(defn insert-event
+  [event_label event_device event_app event_who event_description]
+  (let [row {:event_label event_label
+             :event_device event_device
+             :event_app event_app
+             :event_who event_who
+             :event_description event_description}]
+  (j/insert! pg-db :events row)))
+
 (defn update-profile-experience
   [colonist_experience colonist_id]
   (j/update! pg-db :profile {:colonist_experience colonist_experience} ["colonist_id = ?" colonist_id])
-  (get-latest-colonist-profile colonist_id)
-  )
+  (get-latest-colonist-profile colonist_id))
 
 (defn get-content [] )
 
@@ -138,6 +165,19 @@
   (GET "/" []
         (route/not-found (slurp (io/resource "index.html"))))
   (route/resources "/")
+
+  ;; get-events?page=1
+  (GET "/get-events" request
+    (let [offset (* (- (read-string (get-in request [:params :page])) 1) limit)]
+       (get-events offset)))
+
+  (POST "/post-event" request
+   (let [event_label (get-in request [:body :event_label])
+         event_device (get-in request [:body :event_device])
+         event_app (get-in request [:body :event_app])
+         event_who (get-in request [:body :event_who])
+         event_description (get-in request [:body :event_description])]
+         (insert-event event_label event_device event_app event_who event_description)))
 
  (POST "/post-answer" request
    (let [question-label (get-in request [:body :question_label])
@@ -177,6 +217,7 @@
       (get-colonist-answers colonist-id)
       ))
 
+  ;; get-colonists?page=1
   (GET "/get-colonists" request
     (let [offset (* (- (read-string (get-in request [:params :page])) 1) limit)]
        (get-colonists offset)))
@@ -209,7 +250,9 @@
       (middleware/wrap-json-body {:keywords? true})
       (wrap-cors  :access-control-allow-origin [#"http://localhost:3000"
                                                 #"https://rivalry-profile.now.sh"
-                                                #"http://localhost:8000"]
+                                                #"http://localhost:8000"
+                                                #"https://cabinquest.now.sh"
+                                                #"https://golds.now.sh"]
                   :access-control-allow-methods [:get :put :post :patch :delete])
       middleware/wrap-json-response))
 
