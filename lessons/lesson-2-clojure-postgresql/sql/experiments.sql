@@ -123,6 +123,7 @@ CREATE TABLE events (
   event_app varchar(255) NULL,
   event_who varchar(255) NULL,
   event_description varchar(255) NOT NULL,
+  event_json jsonb,
   created_at timestamp default current_timestamp);
 
 

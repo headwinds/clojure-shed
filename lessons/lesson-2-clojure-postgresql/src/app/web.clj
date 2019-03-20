@@ -49,6 +49,12 @@
 
 (def limit 10)
 
+;; TODO - Add buddy auth
+;; https://adambard.com/blog/clojure-auth-with-buddy/ 
+;; https://github.com/metosin/compojure-api/wiki/Authentication-and-Authorization
+;; https://adambard.com/blog/buddy-password-auth-example/
+;; authenticate routes!
+
 (defn get-colonists
   [offset]
   (j/query pg-db
@@ -116,12 +122,13 @@
   (j/insert! pg-db :question row)))
 
 (defn insert-event
-  [event_label event_device event_app event_who event_description]
+  [event_label event_device event_app event_who event_description event_json] 
   (let [row {:event_label event_label
              :event_device event_device
              :event_app event_app
              :event_who event_who
-             :event_description event_description}]
+             :event_description event_description
+             :event_json event_json}]
   (j/insert! pg-db :events row)))
 
 (defn update-profile-experience
@@ -176,8 +183,9 @@
          event_device (get-in request [:body :event_device])
          event_app (get-in request [:body :event_app])
          event_who (get-in request [:body :event_who])
-         event_description (get-in request [:body :event_description])]
-         (insert-event event_label event_device event_app event_who event_description)))
+         event_description (get-in request [:body :event_description])
+         event_json (get-in request [:body :event_json])]
+         (insert-event event_label event_device event_app event_who event_description event_json)))
 
  (POST "/post-answer" request
    (let [question-label (get-in request [:body :question_label])

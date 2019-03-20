@@ -38,6 +38,3 @@ For more information about using Clojure on Heroku, see these Dev Center article
 - [Getting Started with Clojure on Heroku](https://devcenter.heroku.com/articles/getting-started-with-clojure)
 - [Clojure on Heroku](https://devcenter.heroku.com/categories/clojure)
 
-## Credit
-
-I wanted to learn how to put together a Clojure & Clojurescript project so I basically started by dismantling [yogthos memory-lane](https://github.com/yogthos/memory-hole) to build this project.

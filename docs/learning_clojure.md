@@ -37,36 +37,31 @@ You can also view your logs which are a "stream of time-ordered events aggregate
 heroku logs --tail
 ```
 
-## how to
-[how do I add images?](https://stackoverflow.com/questions/7836030/compojure-access-filesystem)
-
 ## tutorials
-[Clojure web apps: Zero to 'Hello World' on Heroku in Clojure in 15 minutes.](https://adambard.com/blog/Getting-started-with-Clojure-web-apps/)
+* [REPL first learning](https://kimh.github.io/clojure-by-example/#about)
+* [Clojure web apps: Zero to 'Hello World' on Heroku in Clojure in 15 minutes.](https://adambard.com/blog/Getting-started-with-Clojure-web-apps/)
+* [{:4clojure problems}](http://www.4clojure.com/)
+* [{:4clojure ansnwers}](https://github.com/qiuxiafei/4clojure/tree/master/answers)
+* [Compojure Address Book Part 1](http://www.jarrodctaylor.com/posts/Compojure-Address-Book-Part-1/)
+* [Clojure Collections](https://purelyfunctional.tv/guide/clojure-collections)
+* [Learn X in Y minutes where X = Clojure](https://learnxinyminutes.com/docs/clojure/)
 
-[{:4clojure problems}](http://www.4clojure.com/)
-
-[{:4clojure ansnwers}](https://github.com/qiuxiafei/4clojure/tree/master/answers)
-
-[Compojure Address Book Part 1](http://www.jarrodctaylor.com/posts/Compojure-Address-Book-Part-1/)
-
-[Clojure Collections](https://purelyfunctional.tv/guide/clojure-collections)
-
-[Learn X in Y minutes where X = Clojure](https://learnxinyminutes.com/docs/clojure/)
-
+## Compojure
+* [how do I add images?](https://stackoverflow.com/questions/7836030/compojure-access-filesystem) 
 
 ## clojurians
-[beginners](https://clojurians-log.clojureverse.org/beginners/2017-11-01)
+* [beginners](https://clojurians-log.clojureverse.org/beginners/2017-11-01)
 
 ## Podcasts
-[lispcast](https://lispcast.com/)
-[cognitect](http://blog.cognitect.com/cognicast/)
-[workflow with Stuart Sierra](http://thinkrelevance.com/blog/2013/05/29/stuart-sierra-episode-032)
+* [lispcast](https://lispcast.com/)
+* [cognitect](http://blog.cognitect.com/cognicast/)
+* [workflow with Stuart Sierra](http://thinkrelevance.com/blog/2013/05/29/stuart-sierra-episode-032)
 
 ## RSS
-[elfeed-cljsrn](https://github.com/areina/elfeed-cljsrn)
+* [elfeed-cljsrn](https://github.com/areina/elfeed-cljsrn)
 
 ## Books
-[Clojure for the Brave and True](https://www.braveclojure.com/clojure-for-the-brave-and-true/)
+* [Clojure for the Brave and True](https://www.braveclojure.com/clojure-for-the-brave-and-true/)
 
 ## Creator of Clojure
-[Rich Hickey](https://www.infoq.com/profile/Rich-Hickey)
+* [Rich Hickey](https://www.infoq.com/profile/Rich-Hickey)
