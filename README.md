@@ -14,7 +14,7 @@ You can find the source code for each lesson in their own repos listed below.
 
 Complete 3/4
 
-* ✅[lesson 1](https://github.com/headwinds/astronaunt) Clojure - map, filter, find, reduce - [demo](https://glacial-badlands-20785.herokuapp.com/)
+* ✅[lesson 1](https://github.com/headwinds/astronaut) Clojure - map, filter, find, reduce - [demo](https://glacial-badlands-20785.herokuapp.com/)
 * ✅[lesson 2](https://github.com/headwinds/whistlepunk) Clojure PostgreSQL - Achievements & Event Logger - [demo](https://rocky-ridge-38501.herokuapp.com/)
 * ✅[lesson 3](https://github.com/headwinds/reagent-reframe-material-ui) Clojure & ClojureScript (with Reagent/Reframe & the Star Wars API) - [demo](https://reagent-reframe-material.now.sh/)
 * 🚧[lesson 4](https://github.com/headwinds/creeps) Clojure (with Crypto, Dota 2 & Strava APIs) PostgreSQL ClojureScript - 75% complete
